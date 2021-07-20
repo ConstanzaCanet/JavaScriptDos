@@ -1,4 +1,5 @@
-
+//AGREGO CARRITO DE PRUEBA:
+const DATOS=`[{"title":"El señor de los anillos","gender":"Fantasía,aventura","duration":"3:21 horas","year":2003,"fullprice":3000,"image":"./images/lordoftherings.jpg"},{"title":"El castillo en el cielo","gender":"Fantasía, aventura","duration":"2:04 horas","year":1989,"fullprice":2800,"image":"./images/castillo.jpg"},{"title":"Actividad Paranormal","gender":"terror","duration":"1:20 horas","year":2007,"fullprice":2500,"image":"./images/paranormal.jpg"},{"title":"Pulp Fiction","gender":"accion, comedia","duration":"2:58horas","year":1994,"fullprice":2500,"image":"./images/polp.jpg"},{"title":"La lista de Schindler","gender":"drama","duration":"3:17 horas","year":1993,"fullprice":3000,"image":"./images/schneider.jpg"},{"title":"El club de la pelea","gender":"drama, comedia","duration":"2:31 horas","year":1999,"fullprice":2500,"image":"./images/club.jpg"},{"title":"Forrest Gump","gender":"drama,romance","duration":"2:22 horas","year":1994,"fullprice":2300,"image":"./images/forest.jpg"},{"title":"Inglourious Basterds","gender":"bélico, accion","duration":"2:33 horas","year":2009,"fullprice":3000,"image":"./images/bastards.jpg"},{"title":"El padrino","gender":"crime,drama","duration":"2:58 horas","year":1972,"fullprice":3000,"image":"./images/images.jpg"},{"title":"Origen","gender":"ciencia ficcion,drama","duration":"2:42 horas","year":2010,"fullprice":2800,"image":"./images/origen.jpg"}]`
 //CREO OJETOS NUEVOS PARA MOSTRAR
 
 class Movie{
@@ -10,6 +11,7 @@ class Movie{
     this.fullprice= fullprice;
     this.image= image;
   }
+
 }
 
 //DEFINO PELICULAS DISPONIBLES:
@@ -32,6 +34,7 @@ function Guardo() {
 }
 
 //LLamo funcion de guardado
+console.log(JSON.stringify(Movies))
 Guardo()
 
 //CONTINUO CON LA ENTREGA DE TAREA EVENTOS Y DOM!
@@ -63,12 +66,13 @@ let boton2 = document.getElementById("mostrar")
 boton2.addEventListener("dblclick",muestrame)
 boton2.addEventListener('dblclick',ocultar)
 //Creo funcionalidad para comentar y mantener el uso de enter
-//Creo Storage de comentario---si mas adelante pensara en una medida de comentarios(positivos y negativos) serviria
-comentarios=[];
+
+
 function accionEnter(event) {
  
   if (event.keyCode == 13) {
     let text= document.getElementById('opina').value;
+
     let coment = document.getElementById('Comenta');
     let Comentas = document.createElement('p')
     Comentas.textContent= `${text}`
@@ -166,13 +170,4 @@ function searchName() {
 let tecla = document.getElementById("select")
 tecla.addEventListener("click", searchName)
 
-//Veo de crear una funcion carrito
-//Por el momento no está asociado a usuarios
-//Creo un array
 
-let canasta = [];
-//Creo una funcion que tome los elementos ya existentes en el storage
-
-function comprando() {
-  let objeto = localStorage.getItem('movies')
-}
