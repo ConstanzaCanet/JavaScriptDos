@@ -1,0 +1,57 @@
+/* AQUI DEJO UNA MUESTRA DE COMO SE ACOMODARIAN LAS IMAGENES UTILIZANDO CSS, PERO SIENDO SINCERA AMO LO RESPONSIVO DE BOOSTRAP
+#productos{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.carta{
+   display: flex; 
+   flex-wrap: nowrap;
+   width: 50%;
+}
+*/
+.cabeza{
+    background-color:black;    
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+}
+.title{
+    color: white;
+}
+nav{
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #272626 74%);
+    color: white;
+}
+.home{
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.ites li{
+    color: white;
+    font-size: 20px;
+}
+#mostrar{
+    background-color: #c62128;
+    background-image: linear-gradient(147deg, #c62128 0%, #a00000 74%);
+}
+footer{
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #b82e1f 74%);
+}
+
+.foot{
+    display: block;
+    justify-content: end;
+    color: aliceblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+ 
+.puntitos{
+    list-style: none;
+    margin-top: 10%;
+}
+

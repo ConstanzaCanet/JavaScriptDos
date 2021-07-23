@@ -15,7 +15,7 @@ class Movie{
 }
 
 //DEFINO PELICULAS DISPONIBLES:
-const MovieOne = new Movie('El señor de los anillos', 'Fantasía,aventura', '3:21 horas', 2003, 3000, `./images/lordoftherings.jpg` )
+const MovieOne = new Movie('El señor de los anillos', 'Fantasía,aventura', '3:21 horas', 2003, 3000, './images/lordoftherings.jpg' )
 const MovieTwo = new Movie('El castillo en el cielo','Fantasía, aventura','2:04 horas', 1989, 2800, './images/castillo.jpg')
 const MovieThree = new Movie('Actividad Paranormal', 'terror', '1:20 horas', 2007, 2500, "./images/paranormal.jpg")
 const MovieFour = new Movie('Pulp Fiction', 'accion, comedia','2:58horas', 1994, 2500,"./images/polp.jpg")
@@ -43,8 +43,8 @@ function muestrame() {
     let pelis = JSON.parse(localStorage.getItem('movies'))
     pelis.forEach(e => {
       ar.innerHTML += 
-                  `<div class="card mb-3 container">
-                    <img src="${e.image}" class="card-img-top img-fluid" alt="...">
+                  `<div class="card mb-3 carta col">
+                    <img src="${e.image}" class="card-img-top img-fluid" alt="${e.title}">
                     <div class="card-body">
                       <h5 class="card-title">${e.title}</h5>
                       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
