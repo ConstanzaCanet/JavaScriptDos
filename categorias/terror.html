@@ -7,44 +7,60 @@
     <title>Document</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--CSS LINK-->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header class="py-3 mb-4 border-bottom">
-        <div class="container d-flex flex-wrap justify-content-center">
-          <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Pelis y mas pelis!</span>
-          </a>
-          <ul class="nav">
-            <li class="nav-item"><a href="./loguin.html" class="nav-link link-dark px-2">Login</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Sign up</a></li>
-          </ul>
-        </div>
-      </header>
-      <nav class="py-2 bg-light border-bottom">
-        <div class="container d-flex flex-wrap">
-          <ul class="nav me-auto">
-            <li class="nav-item"><a href="../index.html" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="./accion.html" class="nav-link link-dark px-2" id="action">Accion</a></li>
-            <li class="nav-item"><a href="./romance.html" class="nav-link link-dark px-2" id="romance">Romance</a></li>
-            <li class="nav-item"><a href="./drama.html" class="nav-link link-dark px-2" id="drama">Drama</a></li>
-            <li class="nav-item"><a href="./comedia.html" class="nav-link link-dark px-2" id="comedy">Comedia</a></li>
-            <li class="nav-item"><a href="./terror.html" class="nav-link link-dark px-2" id="triller">Terror</a></li>
-            <li class="nav-item"><a href="./aventura.html" class="nav-link link-dark px-2" id="aventura">Aventura</a></li>
-          </ul>
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="busca">
-            <button type="button" class="btn btn-outline-secondary" id="select">Search</button>
-          </form>
-        </div>
-      </nav>
+  <header class="  cabeza">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <a href="../index.html" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none">
+        <img src="../images/pelis.png" style="margin: 2%;">
+        <span class="fs-4 title">Pelis y mas pelis!</span>
+      </a>
+      <ul class="nav navega">
+        <li class="nav-item"><a href="../loguin.html" class="nav-link px-2" style="color: white;">Login</a></li>
+        <li class="nav-item"><a href="../loguin.html" class="nav-link px-2" style="color: white;">Sign up</a></li>
+      </ul>
+    </div>
+  </header>
+  <nav class="py-2 " style="padding-top: 0%;">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto ites">
+        <li class="nav-item"><a href="../index.html" class="nav-link px-2 active home">Home</a></li>
+        <li class="nav-item"><a href="./accion.html" class="nav-link px-2 active" id="action">Accion</a></li>
+        <li class="nav-item"><a href="./romance.html" class="nav-link px-2 active" id="romance">Romance</a></li>
+        <li class="nav-item"><a href="./drama.html" class="nav-link px-2 active" id="drama">Drama</a></li>
+        <li class="nav-item"><a href="./comedia.html" class="nav-link px-2 active" id="comedy">Comedia</a></li>
+        <li class="nav-item"><a href="./terror.html" class="nav-link px-2" id="triller">Terror</a></li>
+        <li class="nav-item"><a href="./aventura.html" class="nav-link px-2" id="aventura">Aventura</a></li>
+      </ul>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0">
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="busca">
+        <button type="button" class="btn btn-outline-secondary" id="select">Search</button>
+      </form>
+    </div>
+  </nav>
 
-      <main >
-          <div id="terror1"></div>
+      <main class="container">
+        <div id="terror1" class="row  row-cols-lg-2 row-cols-1 row-cols-sm-2 row-cols-md-4 "></div>
           
       </main>
 
-
+      
+    <footer class="container-fluid">
+      <div class="row">
+        <div class="col-10">
+          <img src="../images/footer.png" alt="pelisfooter">
+        </div> 
+        <div class="col-lg-auto foot">
+         <ul class="puntitos">
+            <li>Telefono</li>
+            <li>Instagram</li>
+            <li>Facebook</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
 
 
     <!--No es lo mas correcto, pero tengo planeada otra cosa mas adelante, por ente no quise hacer muchas paginas-->
@@ -68,8 +84,8 @@
             let producto = catafilter()
             producto.forEach(e => {
               ar.innerHTML +=
-              `<div class="card mb-3 container">
-                  <img src=".${e.image}" class="card-img-top img-fluid" alt="...">
+              `<div class="card mb-3 container carta">
+                  <img src=".${e.image}" class="card-img-top img-fluid" alt="${e.title}">
                  <div class="card-body">
                     <h5 class="card-title">${e.title}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>

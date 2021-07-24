@@ -17,8 +17,8 @@
             let producto = catafilter()
             producto.forEach(e => {
               ar.innerHTML +=
-              `<div class="card mb-3 container">
-                  <img src=".${e.image}" class="card-img-top img-fluid" alt="...">
+              `<div class="card mb-3 container carta">
+                 <img src=".${e.image}" class="card-img-top img-fluid" alt="${e.title}">
                  <div class="card-body">
                     <h5 class="card-title">${e.title}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
