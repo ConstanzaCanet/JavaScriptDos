@@ -13,7 +13,7 @@ class Movie{
   }
 
 }
-
+/*
 //DEFINO PELICULAS DISPONIBLES:
 const MovieOne = new Movie('El señor de los anillos', 'Fantasía,aventura', '3:21 horas', 2003, 3000, './images/lordoftherings.jpg' )
 const MovieTwo = new Movie('El castillo en el cielo','Fantasía, aventura','2:04 horas', 1989, 2800, './images/castillo.jpg')
@@ -37,7 +37,7 @@ function Guardo() {
 console.log(JSON.stringify(Movies))
 Guardo()
 
-//CONTINUO CON LA ENTREGA DE TAREA EVENTOS Y DOM!
+
 function muestrame() {
     let ar =document.getElementById('productos')
     let pelis = JSON.parse(localStorage.getItem('movies'))
@@ -66,7 +66,7 @@ let boton2 = document.getElementById("mostrar")
 boton2.addEventListener("dblclick",muestrame)
 boton2.addEventListener('dblclick',ocultar)
 //Creo funcionalidad para comentar y mantener el uso de enter
-
+*/
 
 function accionEnter(event) {
  
@@ -172,4 +172,29 @@ tecla.addEventListener("click", searchName)
 
 
 //AJAX
-let APIKEY = 'a3a3e5287e6096a60f24ab99816b466c'
+let APIKEY = '11095f85'
+
+let SOLICITUD = `http://www.omdbapi.com/?apikey=${APIKEY}`
+
+$('#mostrar').click(()=>{
+    $.get(SOLICITUD,function(respuesta, estado) {
+      if (estado ==='success') {
+        let pelis = respuesta;
+        console.log(pelis)
+        for(const dato of pelis){
+          $('#productos').innerHTML=
+                     `<div class="card mb-3 carta col">
+                        <img src="${dato.poster_path}" class="card-img-top img-fluid" alt="${dato.title}">
+                        <div class="card-body">
+                        <h5 class="card-title">${dato.title}</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <button class="btn btn-primary" type="" onclick="Adquirir()">Adquirir</button>
+                         </div>
+                        </div>`
+        };
+      }
+    })
+    
+}
+)
