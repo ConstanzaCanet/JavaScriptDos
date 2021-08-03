@@ -1,15 +1,4 @@
 /* AQUI DEJO UNA MUESTRA DE COMO SE ACOMODARIAN LAS IMAGENES UTILIZANDO CSS, PERO SIENDO SINCERA AMO LO RESPONSIVO DE BOOSTRAP
-#productos{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-between;
-}
-
-.carta{
-   display: flex; 
-   flex-wrap: nowrap;
-   width: 50%;
-}
 */
 .cabeza{
     background-color:black;    
@@ -55,3 +44,8 @@ footer{
     margin-top: 10%;
 }
 
+/*CARDS*/
+
+#card{
+    background-color: rgba(253, 253, 253, 0.719);
+}
