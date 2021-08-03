@@ -1,5 +1,5 @@
 //AGREGO CARRITO DE PRUEBA:
-const DATOS=`[{"title":"El señor de los anillos","gender":"Fantasía,aventura","duration":"3:21 horas","year":2003,"fullprice":3000,"image":"./images/lordoftherings.jpg"},{"title":"El castillo en el cielo","gender":"Fantasía, aventura","duration":"2:04 horas","year":1989,"fullprice":2800,"image":"./images/castillo.jpg"},{"title":"Actividad Paranormal","gender":"terror","duration":"1:20 horas","year":2007,"fullprice":2500,"image":"./images/paranormal.jpg"},{"title":"Pulp Fiction","gender":"accion, comedia","duration":"2:58horas","year":1994,"fullprice":2500,"image":"./images/polp.jpg"},{"title":"La lista de Schindler","gender":"drama","duration":"3:17 horas","year":1993,"fullprice":3000,"image":"./images/schneider.jpg"},{"title":"El club de la pelea","gender":"drama, comedia","duration":"2:31 horas","year":1999,"fullprice":2500,"image":"./images/club.jpg"},{"title":"Forrest Gump","gender":"drama,romance","duration":"2:22 horas","year":1994,"fullprice":2300,"image":"./images/forest.jpg"},{"title":"Inglourious Basterds","gender":"bélico, accion","duration":"2:33 horas","year":2009,"fullprice":3000,"image":"./images/bastards.jpg"},{"title":"El padrino","gender":"crime,drama","duration":"2:58 horas","year":1972,"fullprice":3000,"image":"./images/images.jpg"},{"title":"Origen","gender":"ciencia ficcion,drama","duration":"2:42 horas","year":2010,"fullprice":2800,"image":"./images/origen.jpg"}]`
+//const DATOS=`[{"title":"El señor de los anillos","gender":"Fantasía,aventura","duration":"3:21 horas","year":2003,"fullprice":3000,"image":"./images/lordoftherings.jpg"},{"title":"El castillo en el cielo","gender":"Fantasía, aventura","duration":"2:04 horas","year":1989,"fullprice":2800,"image":"./images/castillo.jpg"},{"title":"Actividad Paranormal","gender":"terror","duration":"1:20 horas","year":2007,"fullprice":2500,"image":"./images/paranormal.jpg"},{"title":"Pulp Fiction","gender":"accion, comedia","duration":"2:58horas","year":1994,"fullprice":2500,"image":"./images/polp.jpg"},{"title":"La lista de Schindler","gender":"drama","duration":"3:17 horas","year":1993,"fullprice":3000,"image":"./images/schneider.jpg"},{"title":"El club de la pelea","gender":"drama, comedia","duration":"2:31 horas","year":1999,"fullprice":2500,"image":"./images/club.jpg"},{"title":"Forrest Gump","gender":"drama,romance","duration":"2:22 horas","year":1994,"fullprice":2300,"image":"./images/forest.jpg"},{"title":"Inglourious Basterds","gender":"bélico, accion","duration":"2:33 horas","year":2009,"fullprice":3000,"image":"./images/bastards.jpg"},{"title":"El padrino","gender":"crime,drama","duration":"2:58 horas","year":1972,"fullprice":3000,"image":"./images/images.jpg"},{"title":"Origen","gender":"ciencia ficcion,drama","duration":"2:42 horas","year":2010,"fullprice":2800,"image":"./images/origen.jpg"}]`
 //CREO OJETOS NUEVOS PARA MOSTRAR
 
 class Movie{
@@ -172,29 +172,63 @@ tecla.addEventListener("click", searchName)
 
 
 //AJAX
-let APIKEY = '11095f85'
+let APIKEY = 'a3a3e5287e6096a60f24ab99816b466c'
 
-let SOLICITUD = `http://www.omdbapi.com/?apikey=${APIKEY}`
+let SOLICITUD = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`
 
-$('#mostrar').click(()=>{
-    $.get(SOLICITUD,function(respuesta, estado) {
-      if (estado ==='success') {
-        let pelis = respuesta;
-        console.log(pelis)
-        for(const dato of pelis){
-          $('#productos').innerHTML=
-                     `<div class="card mb-3 carta col">
-                        <img src="${dato.poster_path}" class="card-img-top img-fluid" alt="${dato.title}">
-                        <div class="card-body">
-                        <h5 class="card-title">${dato.title}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button class="btn btn-primary" type="" onclick="Adquirir()">Adquirir</button>
-                         </div>
-                        </div>`
-        };
-      }
-    })
-    
+let IMGBASE= 'https://image.tmdb.org/t/p/original'
+
+
+  $.get(SOLICITUD, function(data, status) {
+    console.log(data);
+    console.log(status)
+    if (status === 'success') {
+      let peli = data.results
+      
+      console.log(peli) 
+      peli.forEach(e=>{
+        let peliculas = document.getElementById('productos')
+        peliculas.innerHTML +=
+        `<div class="card mb-3 carta col">
+          <img src="${IMGBASE}${e.poster_path}" class="card-img-top img-fluid" alt="${e.title}">
+          <div class="card-body">
+            <h5 class="card-title">${e.title}</h5>
+            <p class="card-text">${e.overview}</p>
+            <p class="card-text"><small class="text-muted">${e.genre_ids}</small></p>
+            <button class="btn btn-primary" type="" onclick="Adquirir()">Adquirir</button>
+         </div>
+        </div>`
+      })
+    }
+})
+
+//GENEROS:
+
+
+
+function cambioOpcionesSelcet(){
+  let genreId = document.getElementById('opciones2').value
+  let baseImagenCambiada = 'https://image.tmdb.org/t/p/w780'
+  let URLGENRE = `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&language=en-US&page=1&primary_release_year=2019&with_genres=${genreId}`
+
+
+  $.get(URLGENRE,function(data,status) {
+    console.log(data)
+    if (status === 'success') {
+      let peli = data.results
+      peli.forEach(e=> {
+         let peliculas = document.getElementById('contenedor')
+          peliculas.innerHTML +=
+          `<div class="card mb-3 carta col">
+          <img src="${baseImagenCambiada}${e.backdrop_path}" class="card-img-top img-fluid" alt="${e.title}">
+          <div class="card-body">
+          <h5 class="card-title">${e.title}</h5>
+          <p class="card-text">${e.overview}</p>
+          <p class="card-text"><small class="text-muted">${e.genre_ids}</small></p>
+          <button class="btn btn-primary" type="" onclick="Adquirir()">Adquirir</button>
+           </div>
+          </div>`
+      })
+    }
+  })
 }
-)

@@ -29,12 +29,19 @@
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto ites">
         <li class="nav-item"><a href="./index.html" class="nav-link px-2 active home">Home</a></li>
-        <li class="nav-item"><a href="./categorias/accion.html" class="nav-link px-2 active" id="action">Accion</a></li>
-        <li class="nav-item"><a href="./categorias/romance.html" class="nav-link px-2 active" id="romance">Romance</a></li>
-        <li class="nav-item"><a href="./categorias/drama.html" class="nav-link px-2 active" id="drama">Drama</a></li>
-        <li class="nav-item"><a href="./categorias/comedia.html" class="nav-link px-2 active" id="comedy">Comedia</a></li>
-        <li class="nav-item"><a href="./categorias/terror.html" class="nav-link px-2" id="triller">Terror</a></li>
-        <li class="nav-item"><a href="./categorias/aventura.html" class="nav-link px-2" id="aventura">Aventura</a></li>
+        <li>
+          <select class="form-select" aria-label="Default select example" id="opciones2" name="opciones2" onchange="cambioOpcionesSelcet()">
+            <option value="">Selecciona una opción
+            <option value="10749">Romance</option>
+            <option value="28,10752">Accion</option>
+            <option value="18">Drama</option>
+            <option value="35">Comedia</option>
+            <option value="27,53">Terror</option>
+            <option value="12">Aventura</option>
+            <option value="14,878">Ciencia Ficcion</option>
+          </select>
+        </li>
+    
       </ul>
       <form class="col-12 col-lg-auto mb-3 mb-lg-0" >
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="busca">
@@ -43,10 +50,8 @@
     </div>
   </nav>
     <main id="m" class="container">
-      <div class="contenedor"></div>
-      <div class="d-grid gap-2">
-        <button class="btn" type="button" id="mostrar" title="double click!"> Ver las Pelis</button>
-      </div>
+      <div id="contenedor"></div>
+      
       <div id="productos" class="row  row-cols-lg-2 row-cols-1 row-cols-sm-2 row-cols-md-4 "></div>
      
 
@@ -78,4 +83,3 @@
     <script src="./main.js"></script>
 </body>
 </html>
-
