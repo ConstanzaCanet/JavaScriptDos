@@ -34,13 +34,12 @@ function Imprime(urlApi) {
   document.getElementById('contenedor').innerHTML=''
   
   $.get(urlApi, function(data, status) {
-    console.log(data);
-    console.log(status)
+ 
     if (status === 'success') {
       let peli = data.results
-      
-      console.log(peli) 
-      peli.forEach(e=>{
+      //aqui agregue un filtro en la funcion, me traía pelis sin imagen y medio vacías. Así que filtre solo las que al menos tenian imagenes
+      let filtro = peli.filter(elemento => elemento.poster_path !== null)
+      filtro.forEach(e=>{
         let peliculas = document.getElementById('contenedor')
         peliculas.innerHTML +=
  
@@ -57,8 +56,6 @@ function Imprime(urlApi) {
         </div>`
         
       })
-    }else if (data.results.length == 0) {
-        $('.error').html('No data found, search again.');
     }
 })
 
@@ -78,7 +75,7 @@ Imprime(SOLICITUD)
 
 function cambioOpcionesSelcet(){
   let genreId = document.getElementById('opciones2').value
-  let URLGENRE = `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&language=en-US&page=1&primary_release_year=2019&with_genres=${genreId}`
+  let URLGENRE = `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&language=en-US&page=1&with_genres=${genreId}`
 
   Imprime(URLGENRE);
 }
@@ -89,8 +86,6 @@ function cambioOpcionesSelcet(){
 //PARA APLICAR LA API CORRECTAMENTE--EN ESTE CASO NO DEVOLVÍA TODAS LAS PELICULAS EN UNA SOLA LLAMADA,
 //SE ME OCURRIERON DOS FORMAS DE HACERLO, ITERAR TODAS LAS PELICULAS EN UN ARRAY(LUEGO DE HACER VARIAS BUSQUEDAS) O TRATAR DE TRABAJAR CON LA CONSULTA INDIVIDUAL(COMO INTENTE AQUÍ)
 
-
-
 function search() {
   let busca = document.getElementById('busca').value
   let titleMovie = busca.replace(/ /g, '+')
@@ -98,13 +93,13 @@ function search() {
   let urlMovTit = `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${titleMovie}`
 
   $.get(urlMovTit, function(data , status) {
-    //VALIDO DATA DEVUELVA E IMPRIMO DATOS
-    console.log(data)
-    Imprime(urlMovTit)
+    if (status ==='success') {
+      Imprime(urlMovTit)
+    }
   })
 }
 
-
+//LLAMO FUNCION SEARCH
 let tecla = document.getElementById("select")
 tecla.addEventListener("click", search)
 //Aplique funcion enter en boton de busqueda
