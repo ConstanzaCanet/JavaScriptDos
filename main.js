@@ -57,8 +57,8 @@ function Imprime(urlApi) {
         </div>`
         
       })
-    }else{
-     console.log('error');
+    }else if (data.results.length == 0) {
+        $('.error').html('No data found, search again.');
     }
 })
 
