@@ -51,7 +51,7 @@ function Imprime(urlApi) {
               <h5 class="card-title">${e.title}</h5>
               <p class="card-text">${e.overview}</p>
               <p class="card-text"><small class="text-muted">${e.release_date}</small></p>
-              <button class="btn btn-outline-primary btn-sm adquirir" type="" id='${e.id}'>Adquirir</button>
+              <button class="btn btn-outline-primary btn-sm" type="" onclick=adquirir(${e.id})>Adquirir</button>
             </div>
           </div>
         </div>`
