@@ -39,6 +39,7 @@ function Imprime(urlApi) {
       let peli = data.results
       //aqui agregue un filtro en la funcion, me traía pelis sin imagen y medio vacías. Así que filtre solo las que al menos tenian imagenes
       let filtro = peli.filter(elemento => elemento.poster_path !== null)
+      console.log(filtro)
       filtro.forEach(e=>{
         let peliculas = document.getElementById('contenedor')
         peliculas.innerHTML +=
@@ -50,7 +51,7 @@ function Imprime(urlApi) {
               <h5 class="card-title">${e.title}</h5>
               <p class="card-text">${e.overview}</p>
               <p class="card-text"><small class="text-muted">${e.release_date}</small></p>
-              <button class="btn btn-outline-primary btn-sm" type="" onclick="Adquirir()">Adquirir</button>
+              <button class="btn btn-outline-primary btn-sm adquirir" type="" id='${e.id}'>Adquirir</button>
             </div>
           </div>
         </div>`
