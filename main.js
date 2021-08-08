@@ -35,7 +35,7 @@ function Imprime(urlApi) {
   
   $.get(urlApi, function(data, status) {
  
-    if (status === 'success') {
+    if (status === 'success' && data.total_results != 0) {
       let peli = data.results
       //aqui agregue un filtro en la funcion, me traía pelis sin imagen y medio vacías. Así que filtre solo las que al menos tenian imagenes
       let filtro = peli.filter(elemento => elemento.poster_path !== null)
@@ -44,23 +44,32 @@ function Imprime(urlApi) {
         let peliculas = document.getElementById('contenedor')
         peliculas.innerHTML +=
  
-        `<div class="col" id='cardd'>
-          <div class="card h-100">
+        `<div class="col" id='card'>
+          <div class="card h-100" id='caja'>
             <img src="${IMGBASE}${e.poster_path}" class="card-img-top" alt="${e.title}">
             <div class="card-body"  id='card'>
               <h5 class="card-title">${e.title}</h5>
               <p class="card-text">${e.overview}</p>
               <p class="card-text"><small class="text-muted">${e.release_date}</small></p>
-              <button class="btn btn-outline-primary btn-sm" type="" onclick=adquirir(${e.id})>Adquirir</button>
+              <input type="button" value="Adquirir" class="btn btn-block btn-primary adquirir" onclick="myFunction(${e.id})" id="${e.id}">
             </div>
           </div>
         </div>`
         
       })
+    }else{
+      let peliculas = document.getElementById('contenedor')
+      peliculas.innerHTML=
+       `<div class="container-fluid alert alert-danger text-center" id='caja'>
+            <h4 class="alert-heading">Upss!</h4>
+            <p>Aun no tenemos esa pelicula!</p>
+            <img src='./images/sorry-icon.png'>
+        </div>`
     }
 })
 
 }
+
 
 //CREO UNA PRIMERA PARTE QUE ME MUESTRE LAS PELIS MAS POPULARES
 let APIKEY = 'a3a3e5287e6096a60f24ab99816b466c'
@@ -73,6 +82,7 @@ Imprime(SOLICITUD)
 
 //GENEROS:
 //CREO UN SELECT QUE ME MUESTRE POR GENEROS
+//LA API TRAE UNA SELECCION DE GENEROS CADA UNO CON SU PROPIO ID CARACTERIATICO, SE PUEDEN VER EN GENRE.JSON POR SI SE QUIERE CAMBIAR EL BUSCADOR
 
 function cambioOpcionesSelcet(){
   let genreId = document.getElementById('opciones2').value
@@ -111,3 +121,13 @@ function rapido(event) {
   }
 }
 document.getElementById('busca').addEventListener('keydown', rapido)
+
+
+//FUNCION QUE ME LLEVA HACIA ARRIBA
+$(document).ready(function() {
+  $('#up').click(function() {
+    $('body,html').animate({
+      scrollTop: '0px'
+    },200)
+  })
+})

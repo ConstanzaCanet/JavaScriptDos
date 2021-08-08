@@ -8,14 +8,14 @@
 
     <!--BOOTSTRAP LINK-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!--CSS LINK-->
     <link rel="stylesheet" href="./style.css">
 </head>
 <body >
   <header class="  cabeza">
     <div class="container d-flex flex-wrap justify-content-center">
-      <a href="/index.html" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none">
+      <a href="C:/Users/carne/Documents/Proyecto/index.html" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none">
         <img src="./images/pelis.png" style="margin: 2%;">
         <span class="fs-4 title">Pelis y mas pelis!</span>
       </a>
@@ -28,10 +28,10 @@
   <nav class="py-2 " style="padding-top: 0%;">
     <div class="container d-flex flex-wrap">
       <ul class="nav me-auto ites">
-        <li class="nav-item"><a href="./index.html" class="nav-link px-2 active home">Home</a></li>
+        <li class="nav-item"><a href="./index.html" class="nav-link px-2 active home ml-2">Home</a></li>
         <li>
-          <select class="form-select" aria-label="Default select example" id="opciones2" name="opciones2" onchange="cambioOpcionesSelcet()">
-            <option value="">Selecciona una opción
+          <select class="btn btn-secondary dropdown-toggle" aria-label="Default select example" id="opciones2" name="opciones2" onchange="cambioOpcionesSelcet()">
+            <option value="" selected="true" disabled="disabled">Categorias</option>  
             <option value="10749">Romance</option>
             <option value="28,10752">Accion</option>
             <option value="18">Drama</option>
@@ -41,7 +41,6 @@
             <option value="14,878">Ciencia Ficcion</option>
           </select>
         </li>
-    
       </ul>
       <section class="col-12 col-lg-auto mb-3 mb-lg-0" >
         <input type="text" id="busca" value ="" size=20>
@@ -49,6 +48,7 @@
       </section>
     </div>
   </nav>
+    <span class="up"></span>
     <main id="m" class="container">
       
       <div id="contenedor" class="mt-5 row row-cols-1 row-cols-md-4 g-4"></div>
@@ -64,6 +64,8 @@
         <button id="sub" type="reset">Submit</button>
         <p id="Comenta"></p>
       </section>
+
+      <div><img src="./images/sombraup.png" alt="up" id="up"></div>
     </main>
 
     <footer class="container-fluid">
@@ -80,6 +82,7 @@
         </div>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
