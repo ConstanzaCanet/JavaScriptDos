@@ -58,6 +58,7 @@ function Imprime(urlApi) {
         
       })
     }else{
+      $('#up').css("display", "none");
       let peliculas = document.getElementById('contenedor')
       peliculas.innerHTML=
        `<div class="container-fluid alert alert-danger text-center" id='caja'>
