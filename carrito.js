@@ -10,9 +10,17 @@ function myFunction(p) {
     let dataCompra = `https://api.themoviedb.org/3/movie/${p}?api_key=${APIKEY}&language=en-US`
     $.get(dataCompra, function(data, status) {
         if (status ==='success') {
-           localStorage.setItem('productos',JSON.stringify(compra))
-           compra.push(data)
-           console.log(compra)
+           let inicio = JSON.parse(localStorage.getItem("compra"))
+
+           if (localStorage.getItem("compra") != null) {
+            
+               inicio.push(data)
+               localStorage.setItem('compra',JSON.stringify(inicio))
+           }else {
+               localStorage.clear()
+               compra.push(data)
+               localStorage.setItem('compra',JSON.stringify(compra))
+           }
         }
     })
 };
@@ -21,7 +29,7 @@ function myFunction(p) {
 //PARA VER EL CARRITO
 //La Api  no manejaba precios, así que me invente los precios tomando el id de la película y dividiendola por 100
 function verCarro() {
-    let todo = JSON.parse(localStorage.getItem("productos"))
+    let todo = JSON.parse(localStorage.getItem("compra"))
     document.getElementById('contenedor').innerHTML=''
     
     todo.forEach(element => {
