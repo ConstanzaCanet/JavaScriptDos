@@ -63,7 +63,7 @@ function Imprime(urlApi) {
       peliculas.innerHTML=
        `<div class="container-fluid alert alert-danger text-center" id='caja'>
             <h4 class="alert-heading">Upss!</h4>
-            <p>Aun no tenemos esa pelicula!</p>
+            <p>Content not found....!</p>
             <img src='./images/sorry-icon.png'>
         </div>`
     }
