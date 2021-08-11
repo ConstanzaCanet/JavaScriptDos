@@ -16,10 +16,12 @@ function myFunction(p) {
             
                inicio.push(data)
                localStorage.setItem('compra',JSON.stringify(inicio))
+               console.log(inicio)
            }else {
                localStorage.clear()
                compra.push(data)
                localStorage.setItem('compra',JSON.stringify(compra))
+               console.log(compra)
            }
         }
     })
@@ -55,3 +57,27 @@ function verCarro() {
                 `
     });
 }
+
+
+  /** sumamos las columnas **/
+ /*
+    // obtenemos el numero de columnas
+    const columnas=document.querySelectorAll("#miTabla thead tr th");
+ 
+    // obtenemos las fila de los totales
+    const totalFila=document.querySelectorAll("#miTabla tfoot tr td");
+ 
+    // bucle por cada una de las columnas excepto la primera
+    for(let i=1; i<columnas.length; i++) {
+        let total=0;
+ 
+        // obtenemos el valor de cada una de las filas
+        filas.forEach((fila) => {
+            total+=parseFloat(fila.querySelectorAll("td")[i].innerHTML);
+        });
+ 
+        // mostramos el total en la ultima fila
+        totalFila[i].innerHTML=total.toFixed(2);
+    }
+ 
+}*/
