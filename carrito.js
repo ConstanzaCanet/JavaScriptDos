@@ -11,7 +11,8 @@ function myFunction(p) {
     $.get(dataCompra, function(data, status) {
         if (status ==='success') {
            let inicio = JSON.parse(localStorage.getItem("compra"))
-
+           console.log(inicio)
+          // let resultado = inicio.find( e => e.p === p ); 
            if (localStorage.getItem("compra") != null) {
             
                inicio.push(data)
@@ -32,30 +33,68 @@ function myFunction(p) {
 //La Api  no manejaba precios, así que me invente los precios tomando el id de la película y dividiendola por 100
 function verCarro() {
     let todo = JSON.parse(localStorage.getItem("compra"))
-    document.getElementById('contenedor').innerHTML=''
+    if (todo != null) {
+
+        document.getElementById('contenedor').innerHTML=''
+        $('#tablita').show()
+
+        todo.forEach(element => {
+            let carro = document.getElementById('impreComprados')
+            carro.innerHTML += `
+                        <tr class="borde">
+                            <td class="p-0">
+                                <div class="card" style="max-width: 500px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                         <img src="${IMGBASE}${element.poster_path}" class="img-fluid rounded-start" alt="${element.title}" title="${element.title}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${element.title}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>$${(element.id / 1000).toFixed(2)}</td>
+                            <td><button type="button" class="btn btn-danger" id="eliminar">Eliminar</button></td>
+                        </tr>
+                    `
+                    $('#up').hide()
+                    $('#verCarro').hide()
+        });
+    }else{
+        alert(` Aun no has elegido nada. Tenemos muchas peliculas, encontraras la elegida sin duda!`)
+    }
+}
+//LLAMO FUNCION CARRITO
+let mirar = document.getElementById('verCarro')
+mirar.addEventListener('click', verCarro)
+
+
+//CREO UNA FUNCION QUE ELIMINE ELEMENTOS DE MI CARRITO
+
+function eliminoPelicula(id) {
     
-    todo.forEach(element => {
-        let carro = document.getElementById('impreComprados')
-        carro.innerHTML += `
-                    <tr>
-                        <td class="p-0">
-                        <div class="card" style="max-width: 500px;">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="${IMGBASE}${element.poster_path}" class="img-fluid rounded-start" alt="${element.title}" title="${element.title}">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title">${element.title}</h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        </td>
-                        <td>$${(element.id / 1000).toFixed(2)}</td>
-                    </tr>
-                `
-    });
+    let borra=JSON.parse(localStorage.getItem("compra"));
+    let nuevaLista = borra.filter(e=>e.id != id)
+    localStorage.setItem("compra",JSON.stringify(nuevaLista))
+    location.reload()
+}
+
+//LLAMO FUNCION DE BORRADO EN BOTON DE ELIMINAR
+let borrando = document.getElementById('eliminar')
+borrando.addEventListener('click',eliminoPelicula)
+
+
+
+
+/*function desactivoBoton(id) {
+    let inicio = JSON.parse(localStorage.getItem("compra"))
+    const resultado = inicio.find( e => e.id === id );
+    console.log(resultado)
+    if (resultado != null) {
+        $(`#${id}`).hide()
+    }
 }
 
 
@@ -81,3 +120,5 @@ function verCarro() {
     }
  
 }*/
+
+

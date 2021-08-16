@@ -1,5 +1,32 @@
+/*Spinner*/
+#cargando{
+    border:  20px solid #000000;
+    border-top-color: rgb(204, 8, 8) ;
+    border-top-style: groove ;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+     -o-animation: girar 1.5s linear infinite;
+     animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar {
+    form { transform: rotate(0deg);}
+    to { transform:rotate(360deg) ;}
+}
+
 /* AQUI DEJO UNA MUESTRA DE COMO SE ACOMODARIAN LAS IMAGENES UTILIZANDO CSS, PERO SIENDO SINCERA AMO LO RESPONSIVO DE BOOSTRAP
 */
+
+
 .cabeza{
     background-color:black;    
     color: white;
@@ -67,4 +94,19 @@ footer{
 }*/
 #tablita{
      border:hidden;
+     display: none;
+}
+.borde td {
+    border: 0;
+     border-bottom:1px solid #000
+    }
+
+ .borde2 th {
+    border: 0;
+    border-bottom:1px solid #000
+}
+    
+#eliminar{
+   margin-top: 100%;
+   margin-left: 35%;
 }

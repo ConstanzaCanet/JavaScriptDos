@@ -26,8 +26,13 @@ document.getElementById('opina').addEventListener('keydown', accionEnter)
 document.getElementById('sub').addEventListener('click', click)
 
 
-
-//AJAX
+//SPINNER
+window.onload = function() {
+  var cargando = document.getElementById('cargando');
+  
+  cargando.style.visibility='hidden';
+  cargando.style.opacity='0'
+}
 //CREO UNA FUNCION QUE IMPRIMA, PARA AHORRAR UN POCO DE CODIGO:
 function Imprime(urlApi) {
 
@@ -51,7 +56,7 @@ function Imprime(urlApi) {
               <h5 class="card-title">${e.title}</h5>
               <p class="card-text">${e.overview}</p>
               <p class="card-text"><small class="text-muted">${e.release_date}</small></p>
-              <input type="button" value="Adquirir" class="btn btn-block btn-primary adquirir" onclick="myFunction(${e.id})" id="${e.id}">
+              <input type="button" value="Adquirir" class="btn btn-block btn-primary adquirir boton" onclick="myFunction(${e.id});" id="${e.id}">
             </div>
           </div>
         </div>`
