@@ -36,7 +36,7 @@ window.onload = function() {
 //CREO UNA FUNCION QUE IMPRIMA, PARA AHORRAR UN POCO DE CODIGO:
 function Imprime(urlApi) {
 
-  document.getElementById('contenedor').innerHTML=''
+  document.getElementById('contenedor').textContent=''
   
   $.get(urlApi, function(data, status) {
  
@@ -46,31 +46,72 @@ function Imprime(urlApi) {
       let filtro = peli.filter(elemento => elemento.poster_path !== null)
       console.log(filtro)
       filtro.forEach(e=>{
-        let peliculas = document.getElementById('contenedor')
-        peliculas.innerHTML +=
- 
-        `<div class="col" id='card'>
-          <div class="card h-100" id='caja'>
-            <img src="${IMGBASE}${e.poster_path}" class="card-img-top" alt="${e.title}">
-            <div class="card-body"  id='card'>
-              <h5 class="card-title">${e.title}</h5>
-              <p class="card-text">${e.overview}</p>
-              <p class="card-text"><small class="text-muted">${e.release_date}</small></p>
-              <input type="button" value="Adquirir" class="btn btn-block btn-primary adquirir boton" onclick="myFunction(${e.id});" id="${e.id}">
-            </div>
-          </div>
-        </div>`
-        
+        //Padre
+        let contenedor = document.getElementById('contenedor')
+        //Hijo
+        let catalogo = document.createElement('div')
+        //'Nietos'
+        let div1= document.createElement('div')
+        div1.setAttribute('class','col')
+        div1.setAttribute('id','card')
+        catalogo.appendChild(div1)
+
+        let div2= document.createElement('div')
+        div2.setAttribute('class','card h-100')
+        div2.setAttribute('id','caja')
+        div1.appendChild(div2)
+
+        let img=document.createElement('img')
+        img.setAttribute('src',`${IMGBASE}${e.poster_path}`)
+        img.setAttribute('class','card-img-top')
+        img.setAttribute('alt',`${e.title}`)
+        div2.appendChild(img)
+
+        let div3= document.createElement('div')
+        div3.setAttribute('class','card-body') 
+        div3.setAttribute('id','card')
+        div2.appendChild(div3)
+
+        let h5=document.createElement('h5')
+        h5.setAttribute('class','card-title')
+        h5.textContent=`${e.title}`
+        div3.appendChild(h5)
+
+        let p1= document.createElement('p')
+        p1.setAttribute('class','card-text')
+        p1.textContent=`${e.overview}`
+        div3.appendChild(p1)
+
+        let p2= document.createElement('p')
+        p2.setAttribute('class','card-text')
+        div3.appendChild(p2)
+
+        let small=document.createElement('small')
+        small.setAttribute('class','text-muted')
+        small.textContent=`${e.release_date}`
+        p2.appendChild(small)
+
+        let input=document.createElement('input')
+        input.setAttribute('type','button')
+        input.setAttribute('value','Adquirir')
+        input.setAttribute('class','btn btn-block btn-primary adquirir boton')
+        input.setAttribute('onclick',`myFunction(${e.id});`)
+        input.setAttribute('id',`${e.id}`)
+        div3.appendChild(input)
+
+        contenedor.appendChild(catalogo)
       })
     }else{
       $('#up').css("display", "none");
-      let peliculas = document.getElementById('contenedor')
-      peliculas.innerHTML=
+      let contenedor = document.getElementById('contenedor')
+        let catalogo = document.createElement('div')
+        catalogo.innerHTML +=
        `<div class="container-fluid alert alert-danger text-center" id='caja'>
             <h4 class="alert-heading">Upss!</h4>
             <p>Content not found....!</p>
             <img src='./images/sorry-icon.png'>
         </div>`
+        contenedor.appendChild(catalogo)
     }
 })
 
@@ -85,6 +126,7 @@ let SOLICITUD = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`
 let IMGBASE= 'https://image.tmdb.org/t/p/original'
 
 Imprime(SOLICITUD)
+//FUNCIONES DE BUSQUEDA
 
 //GENEROS:
 //CREO UN SELECT QUE ME MUESTRE POR GENEROS
@@ -98,7 +140,7 @@ function cambioOpcionesSelcet(){
 }
 
 
-//FUNCION DE BUSQUEDA Y OFRECIMIENTO--
+
 //TRATANDO DE FUSIONAR ESTA FUNCION CON LA API, no logre entender como se aplicaba la funcion de busqueda por titulo, solo por Id
 //PARA APLICAR LA API CORRECTAMENTE--EN ESTE CASO NO DEVOLVÍA TODAS LAS PELICULAS EN UNA SOLA LLAMADA,
 //SE ME OCURRIERON DOS FORMAS DE HACERLO, ITERAR TODAS LAS PELICULAS EN UN ARRAY(LUEGO DE HACER VARIAS BUSQUEDAS) O TRATAR DE TRABAJAR CON LA CONSULTA INDIVIDUAL(COMO INTENTE AQUÍ)
