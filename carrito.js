@@ -1,12 +1,33 @@
 //En este caso, el objeto ya venia armado en la Api, as{i que lo que hice fue un carrito donde enviar esos objetos cuando se elijan
-//DEFINO MI ARRAY CARRITO
-let compra = [];
-
 //UTILIZO UNA FUNCION QUE ME PERMITA TRAER DE LA API UNA SOLA PELICULA, LA QUE YO ELIJA
 //PARA ELLO UTILIZO LA FUNCION DE 'BUSCAR POR ID' QUE POSEE LA API, COLOCO LA ID EN LA CARD IMPRESA Y LA BUSCO 
 
-
 function myFunction(p) {
+    // Consulto el carrito
+    var carritoList = JSON.parse(localStorage.getItem("compra"));
+    // Si no fue creado, lo creo
+    if (!carritoList) {
+        carritoList = [];
+        localStorage.setItem('compra', JSON.stringify(carritoList));
+    }
+    var peliculaIndex = carritoList.findIndex(x => x.id === p);
+    //si existe
+    if (peliculaIndex >= 0) {
+        
+    }else
+    // Si no existe
+    if (peliculaIndex === -1) {
+        // Obtengo la película desde el backend
+        let dataCompra = `https://api.themoviedb.org/3/movie/${p}?api_key=${APIKEY}&language=en-US`
+        $.get(dataCompra, function(data, status) {
+            if (status ==='success') {
+                // La agrego
+                carritoList.push(data);
+                localStorage.setItem('compra', JSON.stringify(carritoList));
+            }
+        })
+    }
+    /*
     let dataCompra = `https://api.themoviedb.org/3/movie/${p}?api_key=${APIKEY}&language=en-US`
     $.get(dataCompra, function(data, status) {
         if (status ==='success') {
@@ -26,6 +47,7 @@ function myFunction(p) {
            }
         }
     })
+    */
 };
 
 
@@ -33,7 +55,7 @@ function myFunction(p) {
 //La Api  no manejaba precios, así que me invente los precios tomando el id de la película y dividiendola por 100
 function verCarro() {
     let todo = JSON.parse(localStorage.getItem("compra"))
-    if (todo != null) {
+    if (todo != null && todo!=0) {
 
         document.getElementById('contenedor').innerHTML=''
         $('#tablita').show()
@@ -41,7 +63,7 @@ function verCarro() {
         todo.forEach(element => {
             let carro = document.getElementById('impreComprados')
             carro.innerHTML += `
-                        <tr class="borde">
+                        <tr class="borde" id="${element.id}">
                             <td class="p-0">
                                 <div class="card" style="max-width: 500px;">
                                 <div class="row g-0">
@@ -56,7 +78,10 @@ function verCarro() {
                                 </div>
                             </td>
                             <td>$${(element.id / 1000).toFixed(2)}</td>
-                            <td><button type="button" class="btn btn-danger" id="eliminar">Eliminar</button></td>
+                            <td>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" id="eliminar" onclick='eliminoPelicula(${element.id})'>
+                                        Eliminar
+                                    </button>
                         </tr>
                     `
                     $('#up').hide()
@@ -76,19 +101,23 @@ mirar.addEventListener('click', verCarro)
 function eliminoPelicula(id) {
     
     let borra=JSON.parse(localStorage.getItem("compra"));
-    let nuevaLista = borra.filter(e=>e.id != id)
-    localStorage.setItem("compra",JSON.stringify(nuevaLista))
-    location.reload()
+    let prom = confirm('seguro que quieres eliminarla?')
+    if (prom == true) {
+        if (borra.length != 1 ) {
+            let nuevaLista = borra.filter(e=>e.id != id)
+            localStorage.setItem("compra",JSON.stringify(nuevaLista))
+            $(`#${id}`).hide()
+        }else if (borra.length = 1) {
+            let nuevaLista = borra.filter(e=>e.id != id)
+            localStorage.setItem("compra",JSON.stringify(nuevaLista))
+            location.reload()
+        }
+    }
 }
 
-//LLAMO FUNCION DE BORRADO EN BOTON DE ELIMINAR
-let borrando = document.getElementById('eliminar')
-borrando.addEventListener('click',eliminoPelicula)
 
 
-
-
-/*function desactivoBoton(id) {
+function desactivoBoton(id) {
     let inicio = JSON.parse(localStorage.getItem("compra"))
     const resultado = inicio.find( e => e.id === id );
     console.log(resultado)
@@ -97,8 +126,12 @@ borrando.addEventListener('click',eliminoPelicula)
     }
 }
 
+ 
 
-  /** sumamos las columnas **/
+
+
+
+/** sumamos las columnas **/
  /*
     // obtenemos el numero de columnas
     const columnas=document.querySelectorAll("#miTabla thead tr th");

@@ -80,13 +80,14 @@ footer{
 #caja{
     -webkit-box-shadow: 0 15px 10px #777;
                   -moz-box-shadow: 0 15px 10px #777;
-                  box-shadow: 0 15px 10px #777;
+                  box-shadow: 0 15px 10px #777;                  
 }
 #up{
     cursor: pointer;
     display:flex;
     margin:0 auto;
 }
+/*Visor movil de las propiedades*/
 
 /*TABLITA DE PRODUCTOS
 #tablita{

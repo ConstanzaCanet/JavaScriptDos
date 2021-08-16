@@ -137,3 +137,6 @@ $(document).ready(function() {
     },200)
   })
 })
+
+
+//Funcion modal para peliculas
