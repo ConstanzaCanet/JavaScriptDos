@@ -50,6 +50,7 @@ function Imprime(urlApi) {
         let contenedor = document.getElementById('contenedor')
         //Hijo
         let catalogo = document.createElement('div')
+        
         //'Nietos'
         let div1= document.createElement('div')
         div1.setAttribute('class','col')
@@ -65,6 +66,7 @@ function Imprime(urlApi) {
         img.setAttribute('src',`${IMGBASE}${e.poster_path}`)
         img.setAttribute('class','card-img-top')
         img.setAttribute('alt',`${e.title}`)
+        input.setAttribute('onclick',`modalMovie(${e.id});`)
         div2.appendChild(img)
 
         let div3= document.createElement('div')
@@ -76,12 +78,12 @@ function Imprime(urlApi) {
         h5.setAttribute('class','card-title')
         h5.textContent=`${e.title}`
         div3.appendChild(h5)
-
+/*
         let p1= document.createElement('p')
         p1.setAttribute('class','card-text')
         p1.textContent=`${e.overview}`
         div3.appendChild(p1)
-
+*/
         let p2= document.createElement('p')
         p2.setAttribute('class','card-text')
         div3.appendChild(p2)
@@ -194,5 +196,10 @@ $(document).ready(function() {
   })
 })
 
+//Funcion modal para mostrar info de la peli
 
-//Funcion modal para peliculas
+function modalMovie(id) {
+  let dataCompra = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}&language=en-US`
+  //imprimir objeto traido:
+  
+}
