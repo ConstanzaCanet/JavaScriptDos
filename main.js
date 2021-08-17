@@ -98,20 +98,34 @@ function Imprime(urlApi) {
         input.setAttribute('onclick',`myFunction(${e.id});`)
         input.setAttribute('id',`${e.id}`)
         div3.appendChild(input)
-
+        //Cierro asociacion de nodo Hijo
         contenedor.appendChild(catalogo)
       })
     }else{
       $('#up').css("display", "none");
-      let contenedor = document.getElementById('contenedor')
-        let catalogo = document.createElement('div')
-        catalogo.innerHTML +=
-       `<div class="container-fluid alert alert-danger text-center" id='caja'>
-            <h4 class="alert-heading">Upss!</h4>
-            <p>Content not found....!</p>
-            <img src='./images/sorry-icon.png'>
-        </div>`
-        contenedor.appendChild(catalogo)
+        //Nodo Padre
+        let contenedor = document.getElementById('contenedor')
+        contenedor.setAttribute('class', 'container-fluid')
+        //Hijo
+        let div1=document.createElement('div')
+        div1.setAttribute('class','container-fluid alert alert-danger text-center')
+        div1.setAttribute('id','caja')
+        contenedor.appendChild(div1)
+        //'Nietos'
+        let h4=document.createElement('h4')
+        h4.setAttribute('class','alert-heading')
+        h4.textContent='Upss!'
+        div1.appendChild(h4)
+
+        let p=document.createElement('p')
+        p.textContent = 'Content not found....!'
+        div1.appendChild(p)
+
+        let img = document.createElement('img')
+        img.setAttribute('src','./images/sorry-icon.png')
+        div1.appendChild(img)
+        //Cierro asociacion de nodo Hijo
+        contenedor.appendChild(div1)
     }
 })
 
