@@ -124,6 +124,7 @@ function Total() {
             suma += total[i];
         }
         let totalImpreso= document.getElementById('total')
+
         let texTotal= document.createTextNode('$'+suma)
         totalImpreso.appendChild(texTotal)
         //Agrego boton que finalice compra
@@ -140,15 +141,11 @@ function Total() {
 
     }
 
-Total()
-
-
-
 //LLAMO FUNCION CARRITO
 let mirar = document.getElementById('verCarro')
 mirar.addEventListener('click', verCarro)
 
-
+Total()
 //CREO UNA FUNCION QUE ELIMINE ELEMENTOS DE MI CARRITO
 
 function eliminoPelicula(id) {
@@ -159,6 +156,12 @@ function eliminoPelicula(id) {
         if (borra.length != 1 ) {
             let nuevaLista = borra.filter(e=>e.id != id)
             localStorage.setItem("compra",JSON.stringify(nuevaLista))
+            //Creo una recarga de elementos del total, para que se actualice con la pagina
+            let totalImpreso= document.getElementById('total')
+            totalImpreso.textContent='';
+            $('#finalizar').empty()
+            
+            Total()
             $(`#${id}`).hide()
         }else if (borra.length = 1) {
             let nuevaLista = borra.filter(e=>e.id != id)
