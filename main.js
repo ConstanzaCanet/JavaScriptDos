@@ -163,7 +163,8 @@ function cambioOpcionesSelcet(){
 
 function search() {
   let busca = document.getElementById('busca').value
-  let titleMovie = busca.replace(/ /g, '+')
+  if (busca != 0) {
+    let titleMovie = busca.replace(/ /g, '+')
   
   let urlMovTit = `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${titleMovie}`
 
@@ -172,6 +173,7 @@ function search() {
       Imprime(urlMovTit)
     }
   })
+  }
 }
 
 //LLAMO FUNCION SEARCH

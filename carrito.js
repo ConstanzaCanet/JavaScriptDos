@@ -107,6 +107,43 @@ function verCarro() {
         alert(` Aun no has elegido nada. Tenemos muchas peliculas, encontraras la elegida sin duda!`)
     }
 }
+
+//SUMAR COLUMNA DE TABLA
+
+function Total() {
+    let todo = JSON.parse(localStorage.getItem("compra"))
+    console.log(todo)
+    let total = [];
+    //Obtengo una lista de los precios de los productos a comprar
+    todo.forEach(e=>{
+        total.push(parseFloat(`${(e.id / 1000).toFixed(2)}`))
+    })
+    //Sumo esos precios---> trate de hacerlo en un solo forEach pero me daba error, solo me funciono así
+        suma=0
+        for (let i = 0; i < total.length; i++) {
+            suma += total[i];
+        }
+        let totalImpreso= document.getElementById('total')
+        let texTotal= document.createTextNode('$'+suma)
+        totalImpreso.appendChild(texTotal)
+        //Agrego boton que finalice compra
+        let finalizar= document.getElementById('finalizar')
+
+        let button= document.createElement('button')
+        button.setAttribute('class',"btn btn-success")
+        button.setAttribute('type','button')
+        button.setAttribute('id',"comprar")
+        button.textContent='Finalizar'
+        
+        finalizar.appendChild(button)
+
+
+    }
+
+Total()
+
+
+
 //LLAMO FUNCION CARRITO
 let mirar = document.getElementById('verCarro')
 mirar.addEventListener('click', verCarro)
