@@ -27,27 +27,6 @@ function myFunction(p) {
             }
         })
     }
-    /*
-    let dataCompra = `https://api.themoviedb.org/3/movie/${p}?api_key=${APIKEY}&language=en-US`
-    $.get(dataCompra, function(data, status) {
-        if (status ==='success') {
-           let inicio = JSON.parse(localStorage.getItem("compra"))
-           console.log(inicio)
-          // let resultado = inicio.find( e => e.p === p ); 
-           if (localStorage.getItem("compra") != null) {
-            
-               inicio.push(data)
-               localStorage.setItem('compra',JSON.stringify(inicio))
-               console.log(inicio)
-           }else {
-               localStorage.clear()
-               compra.push(data)
-               localStorage.setItem('compra',JSON.stringify(compra))
-               console.log(compra)
-           }
-        }
-    })
-    */
 };
 
 
@@ -62,28 +41,65 @@ function verCarro() {
 
         todo.forEach(element => {
             let carro = document.getElementById('impreComprados')
-            carro.innerHTML += `
-                        <tr class="borde" id="${element.id}">
-                            <td class="p-0">
-                                <div class="card" style="max-width: 500px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                         <img src="${IMGBASE}${element.poster_path}" class="img-fluid rounded-start" alt="${element.title}" title="${element.title}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${element.title}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$${(element.id / 1000).toFixed(2)}</td>
-                            <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" id="eliminar" onclick='eliminoPelicula(${element.id})'>
-                                        Eliminar
-                                    </button>
-                        </tr>
-                    `
+
+            let tr=document.createElement('tr')
+            tr.setAttribute('class','borde')
+            tr.setAttribute('id',`${element.id}`)
+
+            let td=document.createElement('td')
+            td.setAttribute('class','p-0')
+            tr.appendChild(td)
+
+            let div1= document.createElement('div')
+            div1.setAttribute('class','card')
+            div1.setAttribute('style','max-width: 500px;')
+            td.appendChild(div1)
+
+            let div2= document.createElement('div')
+            div2.setAttribute('class','row g-0')
+            div1.appendChild(div2)
+
+            let div3= document.createElement('div')
+            div3.setAttribute('class','col-md-4')
+            div2.appendChild(div3)
+
+            let img=document.createElement('img')
+            img.setAttribute('src',`${IMGBASE}${element.poster_path}`)
+            img.setAttribute('class','img-fluid rounded-start')
+            img.setAttribute('alt',`${element.title}`)
+            img.setAttribute('title',`${element.title}`)
+            div3.appendChild(img)
+
+            let div4=document.createElement('div')
+            div4.setAttribute('class','col-md-8')
+            div2.appendChild(div4)
+
+            let div5=document.createElement('div')
+            div5.setAttribute('class','card-body')
+            div4.appendChild(div5)
+
+            let h5=document.createElement('h5')
+            h5.setAttribute('class','card-title')
+            h5.textContent=`${element.title}`
+            div5.appendChild(h5)
+
+            let td2=document.createElement('td')
+            td2.textContent=`$${(element.id / 1000).toFixed(2)}`
+            tr.appendChild(td2)
+
+            let td3=document.createElement('td')
+            tr.appendChild(td3)
+
+            let button= document.createElement('button')
+            button.setAttribute('class',"btn btn-danger")
+            button.setAttribute('type','button')
+            button.setAttribute('id',"eliminar")
+            button.setAttribute('onclick',`eliminoPelicula(${element.id})`)
+            button.textContent='Eliminar'
+            td3.appendChild(button)
+
+            carro.appendChild(tr)
+
                     $('#up').hide()
                     $('#verCarro').hide()
         });
@@ -130,28 +146,5 @@ function desactivoBoton(id) {
 
 
 
-
-/** sumamos las columnas **/
- /*
-    // obtenemos el numero de columnas
-    const columnas=document.querySelectorAll("#miTabla thead tr th");
- 
-    // obtenemos las fila de los totales
-    const totalFila=document.querySelectorAll("#miTabla tfoot tr td");
- 
-    // bucle por cada una de las columnas excepto la primera
-    for(let i=1; i<columnas.length; i++) {
-        let total=0;
- 
-        // obtenemos el valor de cada una de las filas
-        filas.forEach((fila) => {
-            total+=parseFloat(fila.querySelectorAll("td")[i].innerHTML);
-        });
- 
-        // mostramos el total en la ultima fila
-        totalFila[i].innerHTML=total.toFixed(2);
-    }
- 
-}*/
 
 

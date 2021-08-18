@@ -66,7 +66,7 @@ function Imprime(urlApi) {
         img.setAttribute('src',`${IMGBASE}${e.poster_path}`)
         img.setAttribute('class','card-img-top')
         img.setAttribute('alt',`${e.title}`)
-        input.setAttribute('onclick',`modalMovie(${e.id});`)
+        img.setAttribute('onclick',`modalMovie(${e.id});`)
         div2.appendChild(img)
 
         let div3= document.createElement('div')
