@@ -1,14 +1,10 @@
-
-
-//PRESENTO TAREA DE EVENTOS
-//RETO DE LA CLASE(LO DEJO PARA CORRECCION):
+//Creo objeto de usuario/Cliente
 class Person{
-    constructor(namePerson, lastName, pasword, email, cart){
+    constructor(namePerson, lastName, pasword, email){
         this.namePerson = namePerson;
         this.lastName = lastName;
         this.pasword = pasword;
         this.email = email;
-        this.cart = cart;
     }
 }  
 //defino array
