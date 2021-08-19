@@ -29,50 +29,62 @@ function logueo() {
   if (localStorage.getItem('usuarios') != null) {
       let usersListfilter= JSON.parse(localStorage.getItem("usuarios"))
       if (usersListfilter.find(u=> u.username== username1)) {
-        return console.log('no es posible loguear ya existe')
+        return console.log('no es posible loguear ya existe este usuario')
 
       }else if(usersListfilter.find(u=> u.email== email1)){
-        return console.log('no es posible loguear ya existe')
+        return console.log('no es posible loguear ya existe este email')
 
       }else if (validEmail != true) {
         return console.log('no es posible email erroneo')
 
-      }else if (pasword.length < 6) {
+      }else if (password.length < 6) {
         return console.log('no es posible contraseña no valida')
+
+
+
+      }else if (localStorage.getItem('usuarios') == null) {
+          //Si esta vacio inicializo el array--> Primer  push
+        localStorage.clear()
+        let usuario = new Person (username1,email1,password1);
+        usersList.push(usuario)
+        localStorage.setItem('usuarios', JSON.stringify(usersList))
+      }else{
+            //Si cumple las condiciones, se pushea el nuevo usuario al array
+            let usuario = new Person (username1,email1,password1);
+            usersList.push(usuario)
+             localStorage.setItem('usuarios', JSON.stringify(usersList))
       }
-    //Si cumple las condiciones, se pushea el nuevo usuario al array
-    let usuario = new Person (username1,email1,password1);
-    usersList.push(usuario)
-    localStorage.setItem('usuarios', JSON.stringify(usersList))
-
-
-
-
-
-  //Push de nuevo usuario
-  /*if (localStorage.getItem('usuarios') != null) {
-    let usuario = new Person (username1,email1,password1);
-    usersList.push(usuario)
-    localStorage.setItem('usuarios', JSON.stringify(usersList))
-    */
-
-
-
-  //Si esta vacio inicializo el array--> Primer  push
-  }else{
-    localStorage.clear()
-    let usuario = new Person (username1,email1,password1);
-    usersList.push(usuario)
-    localStorage.setItem('usuarios', JSON.stringify(usersList))
-  }
-  console.log(usersList)
-  }
+  }}
 
 document.getElementById('bot').addEventListener('click',logueo)
 
 
+//Funcion para usuarios ya existentes
+// SING IN
+function SignInEnter() {
+  let username1 =document.getElementById('username').value
+  let email1= document.getElementById('email').value
+  let password1= document.getElementById('password').value
+
+  let usersList= JSON.parse(localStorage.getItem("usuarios"))
+
+  if (usersListfilter.find(u=> u.email!= email1)) {
+    alert('email no coincide')
+  }else if (usersListfilter.find(u=> u.username!= username1)) {
+    alert('username no coincide')
+  }else if(usersListfilter.find(u=> u.password!= password1))
+  alert('password no coincide')
+}
 
 
+
+function LogIn() {
+  //Funcion que imprima login
+}
+
+function signIn() {
+  //Funcion que imprima Sign in
+}
 
 
 
