@@ -2,15 +2,16 @@
 //UTILIZO UNA FUNCION QUE ME PERMITA TRAER DE LA API UNA SOLA PELICULA, LA QUE YO ELIJA
 //PARA ELLO UTILIZO LA FUNCION DE 'BUSCAR POR ID' QUE POSEE LA API, COLOCO LA ID EN LA CARD IMPRESA Y LA BUSCO 
 
-function myFunction(p) {
+function adquirir(p) {
     // Consulto el carrito
-    var carritoList = JSON.parse(localStorage.getItem("compra"));
+    let carritoList = JSON.parse(localStorage.getItem("compra"));
     // Si no fue creado, lo creo
     if (!carritoList) {
         carritoList = [];
         localStorage.setItem('compra', JSON.stringify(carritoList));
     }
-    var peliculaIndex = carritoList.findIndex(x => x.id === p);
+    //Me aseguro de que si hay peliculas, no este la que voy a agregar
+    let peliculaIndex = carritoList.findIndex(x => x.id === p);
     //si existe
     if (peliculaIndex >= 0) {
         

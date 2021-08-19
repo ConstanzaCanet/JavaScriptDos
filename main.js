@@ -97,7 +97,7 @@ function Imprime(urlApi) {
         input.setAttribute('type','button')
         input.setAttribute('value','Adquirir')
         input.setAttribute('class','btn btn-block btn-primary adquirir boton')
-        input.setAttribute('onclick',`myFunction(${e.id});`)
+        input.setAttribute('onclick',`adquirir(${e.id});`)
         input.setAttribute('id',`${e.id}`)
         div3.appendChild(input)
         //Cierro asociacion de nodo Hijo

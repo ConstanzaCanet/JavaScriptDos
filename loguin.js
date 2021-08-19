@@ -1,12 +1,82 @@
 //Creo objeto de usuario/Cliente
 class Person{
-    constructor(namePerson, lastName, pasword, email){
-        this.namePerson = namePerson;
-        this.lastName = lastName;
-        this.pasword = pasword;
+    constructor(username,email,pasword){
+        this.username = username;
         this.email = email;
+        this.pasword = pasword;
     }
-}  
+}
+
+
+function logueo() {
+  let username1 =document.getElementById('username').value
+  let email1= document.getElementById('email').value
+  let password1= document.getElementById('password').value
+  
+  //Me adelanto con validacion de email
+  var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  var validEmail= expReg.test(email1) 
+
+
+  //veo si hay registro de log in
+  let usersList= JSON.parse(localStorage.getItem("usuarios"))
+  //Si no hay registros---> creo array de registro
+  if (!usersList) {
+    usersList=[];
+    localStorage.setItem('usuarios',JSON.stringify(usersList))
+  }
+  //Quiero saber si ya existe el usuario, en caso de que el array no sea nulo(Condicionales)
+  if (localStorage.getItem('usuarios') != null) {
+      let usersListfilter= JSON.parse(localStorage.getItem("usuarios"))
+      if (usersListfilter.find(u=> u.username== username1)) {
+        return console.log('no es posible loguear ya existe')
+
+      }else if(usersListfilter.find(u=> u.email== email1)){
+        return console.log('no es posible loguear ya existe')
+
+      }else if (validEmail != true) {
+        return console.log('no es posible email erroneo')
+
+      }else if (pasword.length < 6) {
+        return console.log('no es posible contraseña no valida')
+      }
+    //Si cumple las condiciones, se pushea el nuevo usuario al array
+    let usuario = new Person (username1,email1,password1);
+    usersList.push(usuario)
+    localStorage.setItem('usuarios', JSON.stringify(usersList))
+
+
+
+
+
+  //Push de nuevo usuario
+  /*if (localStorage.getItem('usuarios') != null) {
+    let usuario = new Person (username1,email1,password1);
+    usersList.push(usuario)
+    localStorage.setItem('usuarios', JSON.stringify(usersList))
+    */
+
+
+
+  //Si esta vacio inicializo el array--> Primer  push
+  }else{
+    localStorage.clear()
+    let usuario = new Person (username1,email1,password1);
+    usersList.push(usuario)
+    localStorage.setItem('usuarios', JSON.stringify(usersList))
+  }
+  console.log(usersList)
+  }
+
+document.getElementById('bot').addEventListener('click',logueo)
+
+
+
+
+
+
+
+/*
 //defino array
 let personas=[];
 //defino local storage
@@ -72,3 +142,4 @@ function Saluda() {
   }
   
   veoveo()
+*/

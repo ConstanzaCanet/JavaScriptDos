@@ -13,13 +13,11 @@ body:before{
     top: 0;
     left: 0;
 
-    background: linear-gradient(45deg, rgb(0, 0, 0), rgb(253, 2, 2));
+    background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0));
     opacity: 0.5;
     z-index: -1;
 }
-nav{
-    z-index: 1;
-}
+
 .logBox{
     width: 360px;
     height: 450px;
