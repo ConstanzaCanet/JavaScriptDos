@@ -63,26 +63,8 @@ function logueo() {
       location.reload()
   }}
 
-document.getElementById('bot').addEventListener('click',logueo)
 
 
-//Funcion para usuarios ya existentes
-// SING IN
-function SignInEnter() {
-  //Tomo valores ingrsados
-  let username1 =document.getElementById('username').value
-  let email1= document.getElementById('email').value
-  let password1= document.getElementById('password').value
-
-  let usersList= JSON.parse(localStorage.getItem("usuarios"))
-
-  if (usersListfilter.find(u=> u.email!= email1)) {
-    alert('email no coincide')
-  }else if (usersListfilter.find(u=> u.username!= username1)) {
-    alert('username no coincide')
-  }else if(usersListfilter.find(u=> u.password!= password1))
-  alert('password no coincide')
-}
 
 
 

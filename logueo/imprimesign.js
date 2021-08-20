@@ -37,7 +37,7 @@
     let inputUser= document.createElement('input')
     inputUser.setAttribute('type','text')
     inputUser.setAttribute('placeholder','Username')
-    inputUser.setAttribute('id','username')
+    inputUser.setAttribute('id','username1')
     div.appendChild(inputUser)
   
     let labelPass= document.createElement('label')
@@ -47,7 +47,7 @@
     let inputPass= document.createElement('input')
     inputPass.setAttribute('type','password')
     inputPass.setAttribute('placeholder','Password')
-    inputPass.setAttribute('id','password')
+    inputPass.setAttribute('id','password1')
     div.appendChild(inputPass)
   
     let eye= document.createElement('i')
@@ -57,13 +57,14 @@
   
     let botn =document.createElement('button')
     botn.setAttribute('type','button')
-    botn.setAttribute('id','bot')
+    botn.setAttribute('id','botSing')
     botn.textContent='SIGN IN'
     div.appendChild(botn)
 
     let logEnlace= document.createElement('a')
     logEnlace.setAttribute('href','./loguin.html')
     logEnlace.setAttribute('id','logEnlace')
+    logEnlace.setAttribute('onclick','SignInEnter()')
     logEnlace.textContent='¿No estas registrado?'
     div.appendChild(logEnlace)
 
@@ -71,8 +72,34 @@
     logBox.appendChild(form)
   }
   
+    
+//Funcion para usuarios ya existentes
+// SING IN
+function SignInEnter() {
+  //Tomo valores ingrsados
+  let username1 =document.getElementById('username1').value
+  let password1= document.getElementById('password1').value
+
+  let usersList= JSON.parse(localStorage.getItem("usuarios"))
+
+ if (usersList.find(u=> u.username!= username1)) {
+    return alert('username no coincide')
+  }else if(usersList.find(u=> u.password!= password1))
+  return alert('password no coincide')
+}
+//boton en archivo sign
+
 
     
   //Por defecto----------------------------------------
 
   signIn()
+  //ENTER!
+
+function ingresoRapido1(event) {
+  if (event.keyCode == 13) {
+    SignInEnter()
+  }
+}
+document.getElementById('username1').addEventListener('keydown', ingresoRapido1)
+document.getElementById('password1').addEventListener('keydown', ingresoRapido1)
