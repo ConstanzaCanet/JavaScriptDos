@@ -26,7 +26,10 @@ function logueo() {
     localStorage.setItem('usuarios',JSON.stringify(usersList))
   }
   //Quiero saber si ya existe el usuario, en caso de que el array no sea nulo(Condicionales)
-  if (localStorage.getItem('usuarios') != null) {
+      if(username1== 0 && email1 == 0){
+        return console.log('no hay data suficiente')
+      }
+      else if (localStorage.getItem('usuarios') != null) {
       let usersListfilter= JSON.parse(localStorage.getItem("usuarios"))
       if (usersListfilter.find(u=> u.username== username1)) {
         return console.log('no es posible loguear ya existe este usuario')
@@ -37,13 +40,15 @@ function logueo() {
       }else if (validEmail != true) {
         return console.log('no es posible email erroneo')
 
-      }else if (password.length < 6) {
+      }else if (password1.length <= 6 && password1== 0) {
         return console.log('no es posible contraseña no valida')
 
+      }else if (password1.length <= 6) {
+        return console.log('no es posible contraseña no valida')
 
-
-      }else if (localStorage.getItem('usuarios') == null) {
-          //Si esta vacio inicializo el array--> Primer  push
+      }
+       //Si esta vacio inicializo el array--> Primer  push
+      else if (localStorage.getItem('usuarios') == null) {
         localStorage.clear()
         let usuario = new Person (username1,email1,password1);
         usersList.push(usuario)
@@ -54,6 +59,8 @@ function logueo() {
             usersList.push(usuario)
              localStorage.setItem('usuarios', JSON.stringify(usersList))
       }
+      //Cuidado aqui se tiene que imprimir lo que corresponda
+      location.reload()
   }}
 
 document.getElementById('bot').addEventListener('click',logueo)
@@ -62,6 +69,7 @@ document.getElementById('bot').addEventListener('click',logueo)
 //Funcion para usuarios ya existentes
 // SING IN
 function SignInEnter() {
+  //Tomo valores ingrsados
   let username1 =document.getElementById('username').value
   let email1= document.getElementById('email').value
   let password1= document.getElementById('password').value
@@ -78,80 +86,33 @@ function SignInEnter() {
 
 
 
-function LogIn() {
-  //Funcion que imprima login
-}
-
-function signIn() {
-  //Funcion que imprima Sign in
+//DEFINIMOS  UNA FUNCION MODAL ERROR
+function errorModal(params) {
+  
 }
 
 
 
-/*
-//defino array
-let personas=[];
-//defino local storage
 
+//Funcionalidades del formulario
+//EYE!
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+togglePassword.addEventListener('click', function (e) {
+  // toggle the type attribute
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  // toggle the eye / eye slash icon
+  this.classList.toggle('bi-eye');
+});
 
+//ENTER!
 
-function Saluda() {
-  
-    let namePerson = document.getElementById("nombre").value
-    let lastName= document.getElementById("apellido").value
-    let email = document.getElementById("email").value
-    let pasword = document.getElementById("pasword").value
-   
-    let grupo= JSON.parse(localStorage.getItem('personas'))
-
-    if (namePerson == 0 || email == 0) {
-      let conte2 = document.getElementsByClassName('Salud');
-      let saludando= document.createElement('p');
-      saludando.textContent = `No se pudo registrar! Faltan datos`
-      return conte2[0].appendChild(saludando)
-    } else if (lastName == 0 || pasword ==0) {
-      let conte2 = document.getElementsByClassName('Salud');
-      let saludando= document.createElement('p');
-      saludando.textContent = `No se pudo registrar! Faltan datos`
-      return conte2[0].appendChild(saludando)
-    }else if (pasword.length < 6) {
-      let conte2 = document.getElementsByClassName('Salud');
-      let saludando= document.createElement('p');
-      saludando.textContent = `No se pudo registrar! La contraseña es insuficiente`
-      return conte2[0].appendChild(saludando)
-      //Condicional y Storage
-    }else if (localStorage.getItem('personas') != null) {
-      let usuario = new Person (namePerson,lastName,email,pasword);
-      grupo.push(usuario)
-      localStorage.setItem('personas', JSON.stringify(grupo))
-    }else{
-      localStorage.clear()
-      let usuario = new Person (namePerson,lastName,email,pasword);
-      personas.push(usuario)
-      localStorage.setItem('personas', JSON.stringify(personas))
-    }{
-      let conte2 = document.getElementsByClassName('Salud');
-      let saludando= document.createElement('p');
-      saludando.textContent = `Exelente! Ya te encuentras logueado, tu nombre es ${namePerson} ${lastName} y registraste tu email: ${email}`
-      conte2[0].appendChild(saludando)
-    }
-
-    
-  console.log(personas)
+function ingresoRapido(event) {
+  if (event.keyCode == 13) {
+    logueo()
   }
-  
-  
-  
-  let boton= document.getElementById("bot")
-  boton.addEventListener("click", Saluda)
-
-
-  //Pruebo local storage
-  function veoveo() {
-    let pelis = localStorage.getItem("movie")
-    const peliculas = JSON.parse(pelis)
-    console.log(peliculas)
-  }
-  
-  veoveo()
-*/
+}
+document.getElementById('username').addEventListener('keydown', ingresoRapido)
+document.getElementById('email').addEventListener('keydown', ingresoRapido)
+document.getElementById('password').addEventListener('keydown', ingresoRapido)

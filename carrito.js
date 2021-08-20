@@ -126,7 +126,7 @@ function Total() {
         }
         let totalImpreso= document.getElementById('total')
 
-        let texTotal= document.createTextNode('$'+suma)
+        let texTotal= document.createTextNode('$'+suma.toFixed(2))
         totalImpreso.appendChild(texTotal)
         //Agrego boton que finalice compra
         let finalizar= document.getElementById('finalizar')
