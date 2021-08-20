@@ -5,7 +5,7 @@ function impressLogIn() {
     //Funcion que imprima login
     //Nodo padre
     let logBox=document.getElementById('logBox1')
-    document.getElementById('logBox1').textContent=''
+    
     
     //Nodos hijos
     //imagen con enlace
