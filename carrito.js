@@ -3,7 +3,16 @@
 //PARA ELLO UTILIZO LA FUNCION DE 'BUSCAR POR ID' QUE POSEE LA API, COLOCO LA ID EN LA CARD IMPRESA Y LA BUSCO 
 
 function adquirir(p) {
-    // Consulto el carrito
+    //Primero consulto si hay alguien logueado
+    let usersList= JSON.parse(localStorage.getItem("usuarios"))
+    if (!usersList) {
+        $('#modal').show()
+        return console.log('no compras sin logueo')
+
+        
+      }
+
+    // Luego consulto el carrito
     let carritoList = JSON.parse(localStorage.getItem("compra"));
     // Si no fue creado, lo creo
     if (!carritoList) {
@@ -147,6 +156,10 @@ let mirar = document.getElementById('verCarro')
 mirar.addEventListener('click', verCarro)
 
 Total()
+
+
+
+
 //CREO UNA FUNCION QUE ELIMINE ELEMENTOS DE MI CARRITO
 
 function eliminoPelicula(id) {
@@ -182,8 +195,6 @@ function desactivoBoton(id) {
         $(`#${id}`).hide()
     }
 }
-
- 
 
 
 
