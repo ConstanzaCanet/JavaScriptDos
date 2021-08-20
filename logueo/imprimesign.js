@@ -62,7 +62,7 @@
     div.appendChild(botn)
 
     let logEnlace= document.createElement('a')
-    logEnlace.setAttribute('href','../logueo/loguin.html')
+    logEnlace.setAttribute('href','./loguin.html')
     logEnlace.setAttribute('id','logEnlace')
     logEnlace.textContent='¿No estas registrado?'
     div.appendChild(logEnlace)
