@@ -91,8 +91,8 @@ impressLogIn()
 
 
 
-
-//Creo objeto de usuario/Cliente
+//Logica LOG IN---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Creo objeto de usuario/Cliente----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Person{
     constructor(username,email,password){
         this.username = username;
@@ -122,12 +122,14 @@ function logueo() {
  
 
   //veo si hay registro de log in
-  let usersList= JSON.parse(localStorage.getItem("usuarios"))
+  let usersList= JSON.parse(localStorage.getItem("usuarios")
+  )
   //Si no hay registros---> creo array de registro
   if (!usersList) {
     usersList=[];
     localStorage.setItem('usuarios',JSON.stringify(usersList))
   }
+
   //Quiero saber si ya existe el usuario, en caso de que el array no sea nulo(Condicionales)
       if(username1== 0 && email1 == 0){
         return console.log('no hay data suficiente')
@@ -180,9 +182,11 @@ function logueo() {
 
 //DEFINIMOS  UNA FUNCION MODAL ERROR
 function errorModal(errorCorrespondiente) {
+  
   //Nodo padre
   let div= document.getElementById('modal')
   div.style.display='block'
+
   //Nodo hijo
   let buttClose=document.createElement('button')
   buttClose.textContent='X'

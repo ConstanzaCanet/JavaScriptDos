@@ -155,8 +155,8 @@ function Total() {
         let button= document.createElement('button')
         button.setAttribute('class',"btn btn-success")
         button.setAttribute('type','button')
-        button.setAttribute('onclick','finalizar')
         button.setAttribute('id',"comprar")
+        button.setAttribute('onclick','finalizaCompra()')
         button.textContent='Finalizar'
         
         finalizar.appendChild(button)
@@ -199,9 +199,6 @@ function eliminoPelicula(id) {
 }
 //Creo una funcion que finalice la compra---->Basica tomo datos del ultimo usuario loguado, muestro ventana, pido datos, reseteo carrito
 function finalizaCompra() {
-    //tomo array de usuario actual
-    let usuarioMod= JSON.parse(localStorage.getItem("usuario1"))
-    let nombre= usuarioMod[0].username
 
     //tomo array de total a pagar
     let totalMod= JSON.parse(localStorage.getItem("total"))
@@ -209,6 +206,8 @@ function finalizaCompra() {
 
     //imprimo Modal pidiendo y mostrando datos
     let divCompra= document.getElementById('modalCompra')
+    $('#modalCompra').empty()
+    divCompra.style.display='block';
 
     //boton
     let buttClose=document.createElement('button')
@@ -226,64 +225,113 @@ function finalizaCompra() {
     let form=document.createElement('form')
     form.setAttribute('action','')
     form.setAttribute('class','container')
-  
+    
+
     let div= document.createElement('div')
     div.setAttribute('class','mb-3 row')
-    form.appendChild(div)
-  
-    let labelUser= document.createElement('label')
-    labelUser.textContent=`${nombre}`
-    div.appendChild(labelUser)
+    
 
-    let labelUser2= document.createElement('label')
-    labelUser.textContent=`${T}`
-    div.appendChild(labelUser2)
-  
-    let labelT= document.createElement('label')
-    labelT.textContent='Tarjeta'
-    div.appendChild( labelT)
+
   
     let inputT= document.createElement('input')
-    inputT.setAttribute('type','text')
+    inputT.setAttribute('type','number')
+    inputT.setAttribute('id','numTarjeta')
+    inputT.setAttribute('class','form-control m-3')
     inputT.setAttribute('placeholder','xxxx-xxxx-xxxx-xx')
     inputT.setAttribute('id','tarjeta')
     div.appendChild(inputT)
-  
+  //-------------------
+    let div2=document.createElement('div')
+    div2.setAttribute('class','row m-3')
+    div.appendChild(div2)
+
     let labelPass= document.createElement('label')
+    labelPass.setAttribute('class','col-6')
     labelPass.textContent='Código Seg.'
-    div.appendChild(labelPass)
+    div2.appendChild(labelPass)
   
     let inputPass= document.createElement('input')
+    inputPass.setAttribute('class','form-control col-6')
+    inputPass.setAttribute('id','codTarjeta')
     inputPass.setAttribute('type','password')
     inputPass.setAttribute('placeholder','X-X-X')
-    div.appendChild(inputPass)
+    div2.appendChild(inputPass)
+
+    let div3=document.createElement('div')
+    div3.setAttribute('class','row m-3')
+    div.appendChild(div3)
+
+    let labelVenc= document.createElement('label')
+    labelVenc.setAttribute('class','col-6')
+    labelVenc.textContent='Vencimiento'
+    div3.appendChild(labelVenc)
   
-    let eye= document.createElement('i')
-    eye.setAttribute('class','far fa-eye')
-    eye.setAttribute('id','togglePassword')
-    div.appendChild(eye)
+    let inputVenc= document.createElement('input')
+    inputVenc.setAttribute('class','form-control col-6')
+    inputVenc.setAttribute('id','vencTarjeta')
+    inputVenc.setAttribute('type','number')
+    inputVenc.setAttribute('placeholder','XX/XX')
+    div3.appendChild(inputVenc)
+
+    let div4= document.createElement('div')
+    div4.setAttribute('class','row m-3')
+    div.setAttribute('style','font-size: 20px; font-weight: bolder;')
+    div4.textContent=`Total a pagar   $${T}`
+    div.appendChild(div4)
+
+
   
     let botn =document.createElement('button')
     botn.setAttribute('type','button')
+    botn.setAttribute('class','btn btn-warning m-3')
     botn.setAttribute('id','botFinalizarCompra')
-    botn.textContent='FINALIZAR'
+    botn.setAttribute('onclick','pagar()')
+    botn.textContent='PAGAR'
     div.appendChild(botn)
 
-
+    form.appendChild(div)
     divCompra.appendChild(form)
+
+}
+//Funcion al finalizar compra----->básicamente resetea el carrito y cambia lo que se imprime en el modal.
+//Se podrían haber colocado condicionales para aceptar el pago, pero preferí poner mas enfasis en otras cosas
+
+
+
+function pagar() {
+
+        //tomo array de total a pagar, lo dejo en cero
+    let totalMod= JSON.parse(localStorage.getItem("total"))
+    let T= totalMod[0]
+    T=0;
+    localStorage.setItem('total', JSON.stringify(totalMod))
+    //tomo array de productos, envio a array de productos ya comprados y vacio array 'compra'
+    let productosComprados=[];
+    let todo = JSON.parse(localStorage.getItem("compra"))
+    //Envio a nuevo array
+    productosComprados.push[todo];
+    localStorage.setItem('productosComprados', JSON.stringify(productosComprados))
+    //vacio
+    todo=null;
+    localStorage.setItem('compra', JSON.stringify(todo))
+
+
+    let divCompra= document.getElementById('modalCompra')
+    $('#modalCompra').empty()
+    divCompra.style.display='block';
+
+    let div=document.createElement('div')
+    div.textContent='Gracias por tu compra!'
+    divCompra.appendChild(div)
 
 
 }
 
 //Creo una funcion que cierre modal emergente
 function cerrar() {
-    document.getElementById('modal').style.display='none';
-    //evito que se reimprima muchas veces el modal
-    location.reload()
+    document.getElementById('modalCompra').style.display='none';
   }
 
-  let botFinalizarCompra=document.getElementById('botFinalizarCompra')
-  botFinalizarCompra.on('click',cerrar)
 
 function desactivoBoton(id) {
     let inicio = JSON.parse(localStorage.getItem("compra"))
@@ -293,7 +341,6 @@ function desactivoBoton(id) {
         $(`#${id}`).hide()
     }
 }
-
 
 
 
