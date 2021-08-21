@@ -6,10 +6,8 @@ function adquirir(p) {
     //Primero consulto si hay alguien logueado
     let usersList= JSON.parse(localStorage.getItem("usuarios"))
     if (!usersList) {
-        $('#modal').show()
+        document.getElementById('modal').style.display='block';
         return console.log('no compras sin logueo')
-
-        
       }
 
     // Luego consulto el carrito
@@ -38,6 +36,11 @@ function adquirir(p) {
         })
     }
 };
+//Creo una funcion que cierre modal emergente
+function cerrar() {
+   document.getElementById('modal').style.display='none';
+}
+$('#cerrarModal').on('click',cerrar)
 
 
 //PARA VER EL CARRITO

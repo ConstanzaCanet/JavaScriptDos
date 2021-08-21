@@ -1,3 +1,10 @@
+class PersonLogueada{
+  constructor(username,password){
+      this.username = username;
+      this.password = password;
+  }
+}
+
 
   function signIn() {
     //Funcion que imprima Sign in
@@ -81,19 +88,118 @@ function SignInEnter() {
   let password1= document.getElementById('password1').value
 
   let usersList= JSON.parse(localStorage.getItem("usuarios"))
+  console.log(usersList)
 
- if (usersList.find(u=> u.username!= username1)) {
-    return alert('username no coincide')
-  }else if(usersList.find(u=> u.password!= password1))
-  return alert('password no coincide')
+  let passIngresada=usersList.find(u=> u.password == password1)
+  let userIngresado= usersList.find(u=> u.username== username1)
+  
+  if (username1 ==0) {
+   return errorModal('Datos faltantes...')
+
+  }else if (passIngresada = undefined) {
+    return errorModal('password no coincide')
+
+  }else if(userIngresado = undefined){
+    return errorModal('username no coincide')
+
+  }else{
+    
+    //tomo array de usuario actual para actualizarlo
+    let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
+    let usuario1 = new PersonLogueada (username1,password1);
+    usuarioAhora.push(usuario1)
+    localStorage.setItem('usuarios1', JSON.stringify(usuario1))
+    //Doy respuesta
+    return respModal('Bienvenido')
+  } 
 }
-//boton en archivo sign
+
+
+//DEFINIMOS  UNA FUNCION MODAL ERROR
+function errorModal(errorCorrespondiente) {
+  //Nodo padre
+  let div= document.getElementById('modal')
+  div.style.display='block'
+  //Nodo hijo
+  let buttClose=document.createElement('button')
+  buttClose.textContent='X'
+  buttClose.setAttribute('id',"cerrarModal")
+  buttClose.setAttribute('onclick',"cerrar()")
+  buttClose.setAttribute('class',"btn btn-danger")
+  buttClose.setAttribute('style',"border-radius: 10%;")
+  div.appendChild(buttClose)
+
+  let h4=document.createElement('h4')
+  h4.textContent='Algo salió mal'
+  div.appendChild(h4)
+
+  let hr=document.createElement('hr')
+  div.appendChild(hr)
+
+  let p=document.createElement('p')
+  p.textContent=`${errorCorrespondiente}`
+  div.appendChild(p)
+}
+
+//DEFINIMOS  UNA FUNCION MODAL RESPUESTA(cuando hay exito)
+function respModal(resp) {
+  //Nodo padre
+  let div= document.getElementById('modal')
+  div.style.display='block'
+  //Nodo hijo
+  let buttClose=document.createElement('button')
+  buttClose.textContent='X'
+  buttClose.setAttribute('id',"cerrarModal")
+  buttClose.setAttribute('onclick',"cerrar()")
+  buttClose.setAttribute('class',"btn btn-danger")
+  buttClose.setAttribute('style',"border-radius: 10%;")
+  div.appendChild(buttClose)
+
+  let h4=document.createElement('h4')
+  h4.textContent=`${resp}`
+  div.appendChild(h4)
+
+  let hr=document.createElement('hr')
+  div.appendChild(hr)
+
+  let p=document.createElement('p')
+  p.textContent='Que bien verte de nuevo'
+  div.appendChild(p)
+
+  let a = document.createElement('a')
+  a.setAttribute('href','../index.html')
+  a.textContent='Vuelve a ver nuestro catálogo'
+  div.appendChild(a)
+}
+
+//Creo una funcion que cierre modal emergente
+function cerrar() {
+  document.getElementById('modal').style.display='none';
+  //evito que se reimprima muchas veces el modal
+  location.reload()
+}
+$('#cerrarModal').on('click',cerrar)
 
 
     
   //Por defecto----------------------------------------
 
   signIn()
+
+
+  
+//Funcionalidades del formulario
+//EYE!
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password1');
+togglePassword.addEventListener('click', function (e) {
+  // toggle the type attribute
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  // toggle the eye / eye slash icon
+  this.classList.toggle('bi-eye');
+});
+
   //ENTER!
 
 function ingresoRapido1(event) {
@@ -103,3 +209,7 @@ function ingresoRapido1(event) {
 }
 document.getElementById('username1').addEventListener('keydown', ingresoRapido1)
 document.getElementById('password1').addEventListener('keydown', ingresoRapido1)
+
+//Boton de sign in
+let sign= document.getElementById('botSing')
+sign.addEventListener('click', SignInEnter)

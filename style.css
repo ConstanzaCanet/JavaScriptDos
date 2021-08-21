@@ -112,27 +112,47 @@ footer{
    margin-left: 35%;
 }
 
+/*ESTILOS DE MODAL*/
 
 #modal {
+    display: none;
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    transition: all .5s;
+    top: 30%;
+    left: 30%;
+    height: 40%;
+    width: 40%;
+    border-radius: 10%;
     z-index: 5;
+
+  }
+  #modal h4{
+    display: block;
+    text-align: center;
+    padding-top: 10%;
   }
   #modal p {
-    width: 60%;
-    height: 40%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20%;
     margin: auto;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: center;
+    display: block;
+ }
+ #modal a{
+     text-decoration: none;
+     font-size: 15px;
+     text-align: center;
+     bottom: 0;
+     display: block;
+     padding-top: 20px;
+     color: rgb(202, 9, 9);
+ }
+ #modal a:hover{
+     color: white;
+ }
+
+ #cerrarModal{
+    float: right;
  }
