@@ -121,7 +121,9 @@ function verCarro() {
     }
 }
 
-//SUMAR COLUMNA DE TABLA
+//SUMAR COLUMNA DE TABLA-------------------------------------------------------------------------------------
+
+//Creo funcion que suma e impime ultima fila de la tabla (total)´
 
 function Total() {
     let todo = JSON.parse(localStorage.getItem("compra"))
@@ -136,6 +138,13 @@ function Total() {
         for (let i = 0; i < total.length; i++) {
             suma += total[i];
         }
+
+        //Envio total al local
+        let totalCarr= [];
+        totalCarr.push(suma)
+        localStorage.setItem('total', JSON.stringify(totalCarr))
+
+        //Imprimo total
         let totalImpreso= document.getElementById('total')
 
         let texTotal= document.createTextNode('$'+suma.toFixed(2))
@@ -146,6 +155,7 @@ function Total() {
         let button= document.createElement('button')
         button.setAttribute('class',"btn btn-success")
         button.setAttribute('type','button')
+        button.setAttribute('onclick','finalizar')
         button.setAttribute('id',"comprar")
         button.textContent='Finalizar'
         
@@ -187,8 +197,93 @@ function eliminoPelicula(id) {
         }
     }
 }
+//Creo una funcion que finalice la compra---->Basica tomo datos del ultimo usuario loguado, muestro ventana, pido datos, reseteo carrito
+function finalizaCompra() {
+    //tomo array de usuario actual
+    let usuarioMod= JSON.parse(localStorage.getItem("usuario1"))
+    let nombre= usuarioMod[0].username
+
+    //tomo array de total a pagar
+    let totalMod= JSON.parse(localStorage.getItem("total"))
+    let T= totalMod[0]
+
+    //imprimo Modal pidiendo y mostrando datos
+    let divCompra= document.getElementById('modalCompra')
+
+    //boton
+    let buttClose=document.createElement('button')
+    buttClose.textContent='X'
+    buttClose.setAttribute('id',"cerrarModal")
+    buttClose.setAttribute('onclick',"cerrar()")
+    buttClose.setAttribute('class',"btn btn-danger")
+    buttClose.setAttribute('style',"border-radius: 10%;")
+    divCompra.appendChild(buttClose)
+    //h1
+    let h1=document.createElement('h1')
+    h1.textContent='Finaliza tu compra'
+    divCompra.appendChild(h1)
+    //form
+    let form=document.createElement('form')
+    form.setAttribute('action','')
+    form.setAttribute('class','container')
+  
+    let div= document.createElement('div')
+    div.setAttribute('class','mb-3 row')
+    form.appendChild(div)
+  
+    let labelUser= document.createElement('label')
+    labelUser.textContent=`${nombre}`
+    div.appendChild(labelUser)
+
+    let labelUser2= document.createElement('label')
+    labelUser.textContent=`${T}`
+    div.appendChild(labelUser2)
+  
+    let labelT= document.createElement('label')
+    labelT.textContent='Tarjeta'
+    div.appendChild( labelT)
+  
+    let inputT= document.createElement('input')
+    inputT.setAttribute('type','text')
+    inputT.setAttribute('placeholder','xxxx-xxxx-xxxx-xx')
+    inputT.setAttribute('id','tarjeta')
+    div.appendChild(inputT)
+  
+    let labelPass= document.createElement('label')
+    labelPass.textContent='Código Seg.'
+    div.appendChild(labelPass)
+  
+    let inputPass= document.createElement('input')
+    inputPass.setAttribute('type','password')
+    inputPass.setAttribute('placeholder','X-X-X')
+    div.appendChild(inputPass)
+  
+    let eye= document.createElement('i')
+    eye.setAttribute('class','far fa-eye')
+    eye.setAttribute('id','togglePassword')
+    div.appendChild(eye)
+  
+    let botn =document.createElement('button')
+    botn.setAttribute('type','button')
+    botn.setAttribute('id','botFinalizarCompra')
+    botn.textContent='FINALIZAR'
+    div.appendChild(botn)
 
 
+    divCompra.appendChild(form)
+
+
+}
+
+//Creo una funcion que cierre modal emergente
+function cerrar() {
+    document.getElementById('modal').style.display='none';
+    //evito que se reimprima muchas veces el modal
+    location.reload()
+  }
+
+  let botFinalizarCompra=document.getElementById('botFinalizarCompra')
+  botFinalizarCompra.on('click',cerrar)
 
 function desactivoBoton(id) {
     let inicio = JSON.parse(localStorage.getItem("compra"))

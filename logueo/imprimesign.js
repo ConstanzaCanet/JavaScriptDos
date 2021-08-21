@@ -115,6 +115,7 @@ function SignInEnter() {
 }
 
 
+
 //DEFINIMOS  UNA FUNCION MODAL ERROR
 function errorModal(errorCorrespondiente) {
   //Nodo padre
