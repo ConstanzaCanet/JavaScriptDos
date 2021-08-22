@@ -96,23 +96,16 @@ function imprimirEnNav() {
       
       if (!usuarioAhora) {
         document.getElementById('carroIndex').style.display='none';
-        document.getElementById('off').style.display='none'
+
 
       }else if (usuarioAhora[0] ==0) {
         document.getElementById('carroIndex').style.display='none';
-        document.getElementById('off').style.display='none'
+
       }
 }
 //se imprime o no el carro--->Depende si hay logueo existente
 imprimirEnNav()
-//Boton off---->Salir, deslogueo
-function salir() {
-  let usuarioAhora=JSON.parse(localStorage.getItem("usuarios1"))
-  usuarioAhora.splice(0,1)
-  localStorage.setItem('usuarios1', JSON.stringify(usuarioAhora))
-}
-let botSalida=document.getElementById('off')
-botSalida.addEventListener('click',salir())
+
 
 //FUNCIONES DE BUSQUEDA
 //GENEROS:
