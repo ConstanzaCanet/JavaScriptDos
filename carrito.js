@@ -6,14 +6,14 @@ function adquirir(p) {
     //Primero consulto si hay alguien logueado
     let usersList= JSON.parse(localStorage.getItem("usuarios"))
     //Consulto ultimo logueo
-    let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
+    let usuarioAhora= JSON.parse(localStorage.getItem("usuarios1"))
     
-    if (!usersList) {
+    if (usersList==null) {
         document.getElementById('modal').style.display='block';
-        return console.log('no compras sin logueo')
+        return alert('Primero debes ingresar o registrarte!')
       }else if(usuarioAhora == 0){
         document.getElementById('modal').style.display='block';
-        return console.log('no compras sin logueo')
+        alert('Primero debes ingresar o registrarte!')
       }
 
     // Luego consulto el carrito
@@ -333,9 +333,14 @@ function pagar() {
     div.textContent='Gracias por tu compra!'
     divCompra.appendChild(div)
 
+    refrescar(100);
 
 }
-
+  //Declaramos la función que recibe el tiempo
+  function refrescar(tiempo){
+    //Cuando pase el tiempo elegido la página se refrescará 
+    setTimeout("location.reload(true);", tiempo);
+  }
 //Creo una funcion que cierre modal emergente
 function cerrar() {
     document.getElementById('modalCompra').style.display='none';

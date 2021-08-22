@@ -81,10 +81,14 @@ function Imprime(urlApi) {
 let APIKEY = 'a3a3e5287e6096a60f24ab99816b466c'
 
 let SOLICITUD = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`
+let otras=`https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKEY}&language=en-US&page=1`
+
 
 let IMGBASE= 'https://image.tmdb.org/t/p/original'
 
 Imprime(SOLICITUD)
+Imprime(otras)
+
 //CREO FUNCION QUE BUSQUE LOGUEO EXISTENTE PARA IMPRIMIR O NO EL CARRITO
 function imprimirEnNav() {
       //Consulto ultimo logueo
@@ -92,17 +96,23 @@ function imprimirEnNav() {
       
       if (!usuarioAhora) {
         document.getElementById('carroIndex').style.display='none';
+        document.getElementById('off').style.display='none'
 
       }else if (usuarioAhora[0] ==0) {
         document.getElementById('carroIndex').style.display='none';
-
-      }else{
-        console.log(usuarioLogueado)
+        document.getElementById('off').style.display='none'
       }
 }
 //se imprime o no el carro--->Depende si hay logueo existente
 imprimirEnNav()
-
+//Boton off---->Salir, deslogueo
+function salir() {
+  let usuarioAhora=JSON.parse(localStorage.getItem("usuarios1"))
+  usuarioAhora.splice(0,1)
+  localStorage.setItem('usuarios1', JSON.stringify(usuarioAhora))
+}
+let botSalida=document.getElementById('off')
+botSalida.addEventListener('click',salir())
 
 //FUNCIONES DE BUSQUEDA
 //GENEROS:
@@ -254,7 +264,7 @@ function modalMovie(p) {
       input.setAttribute('value','Adquirir')
       input.setAttribute('class','btn btn-block btn-primary adquirir boton')
       input.setAttribute('onclick',`adquirir(${data.id});`)
-      input.setAttribute('id',`${data.id}`)
+      input.setAttribute('id',`${data.id} botoncito`)
       divF.appendChild(input)
 
 

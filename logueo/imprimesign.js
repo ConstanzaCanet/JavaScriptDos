@@ -91,7 +91,7 @@ function SignInEnter() {
   console.log(usersList)
   //si no hay array, detengo y aviso falta de registro
   if (!usersList) {
-    return errorModal('No tengo ese usuario registrado.')
+    return errorModal('No tengo ese usuario registrado')
     //si hay un array, busco valores y comparo
   }else{
     let passIngresada=usersList.find(u=> u.password == password1)
@@ -108,7 +108,7 @@ function SignInEnter() {
      }else{
        
        //tomo array de usuario actual para actualizarlo
-       let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
+       let usuarioAhora= JSON.parse(localStorage.getItem("usuarios1"))
        let usuario1 = new PersonLogueada (username1,password1);
        usuarioAhora.push(usuario1)
        localStorage.setItem('usuarios1', JSON.stringify(usuario1))
