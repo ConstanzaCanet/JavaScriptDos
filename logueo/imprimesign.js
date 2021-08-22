@@ -86,32 +86,38 @@ function SignInEnter() {
   //Tomo valores ingrsados
   let username1 =document.getElementById('username1').value
   let password1= document.getElementById('password1').value
-
+  //veo si hay un registro(si es que hay array de usuarios)
   let usersList= JSON.parse(localStorage.getItem("usuarios"))
   console.log(usersList)
-
-  let passIngresada=usersList.find(u=> u.password == password1)
-  let userIngresado= usersList.find(u=> u.username== username1)
-  
-  if (username1 ==0) {
-   return errorModal('Datos faltantes...')
-
-  }else if (passIngresada = undefined) {
-    return errorModal('password no coincide')
-
-  }else if(userIngresado = undefined){
-    return errorModal('username no coincide')
-
+  //si no hay array, detengo y aviso falta de registro
+  if (!usersList) {
+    return errorModal('No tengo ese usuario registrado.')
+    //si hay un array, busco valores y comparo
   }else{
-    
-    //tomo array de usuario actual para actualizarlo
-    let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
-    let usuario1 = new PersonLogueada (username1,password1);
-    usuarioAhora.push(usuario1)
-    localStorage.setItem('usuarios1', JSON.stringify(usuario1))
-    //Doy respuesta
-    return respModal('Bienvenido')
-  } 
+    let passIngresada=usersList.find(u=> u.password == password1)
+    let userIngresado= usersList.find(u=> u.username== username1)
+    if (username1 ==0) {
+      return errorModal('Datos faltantes...')
+   
+     }else if (passIngresada = undefined) {
+       return errorModal('password no coincide')
+   
+     }else if(userIngresado == undefined){
+       return errorModal('username no coincide')
+   
+     }else{
+       
+       //tomo array de usuario actual para actualizarlo
+       let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
+       let usuario1 = new PersonLogueada (username1,password1);
+       usuarioAhora.push(usuario1)
+       localStorage.setItem('usuarios1', JSON.stringify(usuario1))
+       //Doy respuesta
+       return respModal('Bienvenido')
+     } 
+
+  }
+  
 }
 
 
