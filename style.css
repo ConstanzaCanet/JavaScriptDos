@@ -59,6 +59,10 @@ nav{
     font-weight: bolder;
     font-size: 20px;
 }
+.ites{
+    display: flex;
+    justify-content: end;
+}
 .ites li{
     color: rgb(0, 0, 0);
     font-size: 30px;
@@ -66,22 +70,6 @@ nav{
 #mostrar{
     background-color: #c62128;
     background-image: linear-gradient(147deg, #c62128 0%, #a00000 74%);
-}
-footer{
-    background-color: #000000;
-    background-image: linear-gradient(315deg, #000000 0%, #b82e1f 74%);
-}
-
-.foot{
-    display: block;
-    justify-content: end;
-    color: aliceblue;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
- 
-.puntitos{
-    list-style: none;
-    margin-top: 10%;
 }
 
 /*CARDS*/
@@ -187,4 +175,20 @@ footer{
     z-index: 5;
   }
 
-/*Modal Movies*/
+  footer{
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #b82e1f 74%);
+}
+
+.foot{
+    display: block;
+    justify-content: end;
+    color: aliceblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+ 
+.puntitos{
+    list-style: none;
+    margin-top: 10%;
+}
+

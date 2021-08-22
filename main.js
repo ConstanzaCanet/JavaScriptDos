@@ -1,31 +1,4 @@
 
-//Creo funcionalidad para comentar y mantener el uso de enter
-
-function accionEnter(event) {
- 
-  if (event.keyCode == 13) {
-    let text= document.getElementById('opina').value;
-
-    let coment = document.getElementById('Comenta');
-    let Comentas = document.createElement('p')
-    Comentas.textContent= `${text}`
-    coment.appendChild(Comentas) 
-  }
-
-}
-
-function click() {
-  let text= document.getElementById('opina').value;
-  let coment = document.getElementById('Comenta');
-  let Comentas = document.createElement('p')
-  Comentas.textContent= `${text}`
-  coment.appendChild(Comentas) 
-}
-
-document.getElementById('opina').addEventListener('keydown', accionEnter)
-document.getElementById('sub').addEventListener('click', click)
-
-
 //SPINNER
 window.onload = function() {
   var cargando = document.getElementById('cargando');
@@ -33,6 +6,7 @@ window.onload = function() {
   cargando.style.visibility='hidden';
   cargando.style.opacity='0'
 }
+
 //CREO UNA FUNCION QUE IMPRIMA, PARA AHORRAR UN POCO DE CODIGO:
 function Imprime(urlApi) {
 
@@ -101,9 +75,7 @@ function Imprime(urlApi) {
         contenedor.appendChild(div1)
     }
 })
-
 }
-
 
 //CREO UNA PRIMERA PARTE QUE ME MUESTRE LAS PELIS MAS POPULARES
 let APIKEY = 'a3a3e5287e6096a60f24ab99816b466c'
@@ -113,8 +85,26 @@ let SOLICITUD = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`
 let IMGBASE= 'https://image.tmdb.org/t/p/original'
 
 Imprime(SOLICITUD)
-//FUNCIONES DE BUSQUEDA
+//CREO FUNCION QUE BUSQUE LOGUEO EXISTENTE PARA IMPRIMIR O NO EL CARRITO
+function imprimirEnNav() {
+      //Consulto ultimo logueo
+      let usuarioAhora=(localStorage.getItem("usuarios1"))
+      
+      if (!usuarioAhora) {
+        document.getElementById('carroIndex').style.display='none';
 
+      }else if (usuarioAhora[0] ==0) {
+        document.getElementById('carroIndex').style.display='none';
+
+      }else{
+        console.log(usuarioLogueado)
+      }
+}
+//se imprime o no el carro--->Depende si hay logueo existente
+imprimirEnNav()
+
+
+//FUNCIONES DE BUSQUEDA
 //GENEROS:
 //CREO UN SELECT QUE ME MUESTRE POR GENEROS
 //LA API TRAE UNA SELECCION DE GENEROS CADA UNO CON SU PROPIO ID CARACTERIATICO, SE PUEDEN VER EN GENRE.JSON POR SI SE QUIERE CAMBIAR EL BUSCADOR
@@ -270,7 +260,4 @@ function modalMovie(p) {
 
     }
 })
-  
-  
-  
 }

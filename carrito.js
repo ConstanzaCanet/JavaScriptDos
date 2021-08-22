@@ -7,11 +7,11 @@ function adquirir(p) {
     let usersList= JSON.parse(localStorage.getItem("usuarios"))
     //Consulto ultimo logueo
     let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
-    let usuarioLogueado= usuarioAhora[0]
+    
     if (!usersList) {
         document.getElementById('modal').style.display='block';
         return console.log('no compras sin logueo')
-      }else if(usuarioLogueado == 0){
+      }else if(usuarioAhora == 0){
         document.getElementById('modal').style.display='block';
         return console.log('no compras sin logueo')
       }
