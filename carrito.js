@@ -5,7 +5,13 @@
 function adquirir(p) {
     //Primero consulto si hay alguien logueado
     let usersList= JSON.parse(localStorage.getItem("usuarios"))
+    //Consulto ultimo logueo
+    let usuarioAhora= JSON.parse(localStorage.getItem("usuario1"))
+    let usuarioLogueado= usuarioAhora[0]
     if (!usersList) {
+        document.getElementById('modal').style.display='block';
+        return console.log('no compras sin logueo')
+      }else if(usuarioLogueado == 0){
         document.getElementById('modal').style.display='block';
         return console.log('no compras sin logueo')
       }
@@ -36,11 +42,14 @@ function adquirir(p) {
         })
     }
 };
+
+
 //Creo una funcion que cierre modal emergente
-function cerrar() {
+function cerrarIn() {
    document.getElementById('modal').style.display='none';
 }
-$('#cerrarModal').on('click',cerrar)
+
+$('#cerrarModalIn').on('click',cerrarIn)
 
 
 //PARA VER EL CARRITO

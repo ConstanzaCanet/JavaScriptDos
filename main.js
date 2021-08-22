@@ -50,11 +50,14 @@ function Imprime(urlApi) {
         let contenedor = document.getElementById('contenedor')
         //Hijo
         let catalogo = document.createElement('div')
+        catalogo.setAttribute('data-bs-toggle','modal')
+        catalogo.setAttribute('data-bs-target','#exampleModal')
         
         //'Nietos'
         let div1= document.createElement('div')
         div1.setAttribute('class','col')
         div1.setAttribute('id','card')
+        div1.setAttribute('onclick',`modalMovie(${e.id})`)
         catalogo.appendChild(div1)
 
         let div2= document.createElement('div')
@@ -66,40 +69,8 @@ function Imprime(urlApi) {
         img.setAttribute('src',`${IMGBASE}${e.poster_path}`)
         img.setAttribute('class','card-img-top')
         img.setAttribute('alt',`${e.title}`)
-        img.setAttribute('onclick',`modalMovie(${e.id});`)
         div2.appendChild(img)
 
-        let div3= document.createElement('div')
-        div3.setAttribute('class','card-body') 
-        div3.setAttribute('id','card')
-        div2.appendChild(div3)
-
-        let h5=document.createElement('h5')
-        h5.setAttribute('class','card-title')
-        h5.textContent=`${e.title}`
-        div3.appendChild(h5)
-/*
-        let p1= document.createElement('p')
-        p1.setAttribute('class','card-text')
-        p1.textContent=`${e.overview}`
-        div3.appendChild(p1)
-*/
-        let p2= document.createElement('p')
-        p2.setAttribute('class','card-text')
-        div3.appendChild(p2)
-
-        let small=document.createElement('small')
-        small.setAttribute('class','text-muted')
-        small.textContent=`${e.release_date}`
-        p2.appendChild(small)
-
-        let input=document.createElement('input')
-        input.setAttribute('type','button')
-        input.setAttribute('value','Adquirir')
-        input.setAttribute('class','btn btn-block btn-primary adquirir boton')
-        input.setAttribute('onclick',`adquirir(${e.id});`)
-        input.setAttribute('id',`${e.id}`)
-        div3.appendChild(input)
         //Cierro asociacion de nodo Hijo
         contenedor.appendChild(catalogo)
       })
@@ -198,10 +169,108 @@ $(document).ready(function() {
   })
 })
 
-//Funcion modal para mostrar info de la peli
+//Funcion modal para mostrar info de la peli------->Mejor presentacion para los productos
 
-function modalMovie(id) {
-  let dataCompra = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}&language=en-US`
-  //imprimir objeto traido:
+function modalMovie(p) {
+  let dataCompra = `https://api.themoviedb.org/3/movie/${p}?api_key=${APIKEY}&language=en-US`
+  let dataVideo =`https://api.themoviedb.org/3/movie/${p}/videos?api_key=${APIKEY}&language=en-US`
+  
+  $.get(dataCompra, function(data, status) { 
+    if (status =='success') {
+      console.log(data.genres)
+    let genresArray= data.genres
+    let uno=genresArray[0].name
+    let dos=genresArray[1].name
+
+        //imprimir objeto traido:
+      let ModalMovie= document.getElementById('ModalMovie')
+      ModalMovie.innerHTML=''
+      
+      let div1=document.createElement('div')
+      div1.setAttribute('class','modal-header')
+      ModalMovie.appendChild(div1)
+
+      let buttonClose= document.createElement('button')
+      buttonClose.setAttribute('type','button')
+      buttonClose.setAttribute('class',"btn-close")
+      buttonClose.setAttribute('data-bs-dismiss',"modal")
+      buttonClose.setAttribute('aria-label',"Close")
+      div1.appendChild(buttonClose) 
+
+      let h5= document.createElement('h5')
+      h5.setAttribute('class',"modal-title ml-5")
+      h5.setAttribute('id',"exampleModalLabel")
+      h5.setAttribute('style','font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; font-size: 40px')
+      h5.textContent=`${data.title}`
+      ModalMovie.appendChild(h5)
+      //Info movie
+      let divBody= document.createElement('div')
+      divBody.setAttribute('class','modal-body')
+      ModalMovie.appendChild(divBody)
+
+      let img=document.createElement('img')
+      img.setAttribute('src',`${IMGBASE}${data.poster_path}`)
+      img.setAttribute('class','card-img-top')
+      img.setAttribute('alt',`${data.title}`)
+      divBody.appendChild(img)
+
+      let sinopsis= document.createElement('article')
+      sinopsis.setAttribute('style','font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;')
+      sinopsis.setAttribute('class','m-2')
+      sinopsis.textContent=`${data.overview}`
+      divBody.appendChild(sinopsis)
+
+      //imprimo enlace para ver triller mediante otra funcion de busqueda que posee la Api
+      $.get(dataVideo,function(d,s) {
+        if (s== 'success') {
+          let trillerArray= d.results
+          let trillerKey0= trillerArray[0]
+          let trillerKey1= trillerArray[1]
+          
+          let triller= document.createElement('a')
+          triller.setAttribute('class','link mt-3')
+          triller.setAttribute('target','_blank')
+          triller.setAttribute('style','display:block')
+          triller.setAttribute('href',`https://www.youtube.com/watch?v=${trillerKey0.key}`)
+          triller.textContent='See more'
+          divBody.appendChild(triller)
+
+          let triller1= document.createElement('a')
+          triller1.setAttribute('class','link')
+          triller1.setAttribute('target','_blank')
+          triller1.setAttribute('style','display:block')
+          triller1.setAttribute('href',`https://www.youtube.com/watch?v=${trillerKey1.key}`)
+          triller1.textContent='See more'
+          divBody.appendChild(triller1)
+
+        }
+      })
+      let generos=document.createElement('p')
+      generos.setAttribute('class','ml-2 mt-3')
+      generos.textContent=`Genders: ${uno}, ${dos}`
+      divBody.appendChild(generos)
+
+      let small=document.createElement('small')
+      small.setAttribute('class','text-muted')
+      small.textContent=`Release date: ${data.release_date}`
+      divBody.appendChild(small)
+      
+      let divF=document.createElement('div')
+      divF.setAttribute('class','modal-footer')
+      ModalMovie.appendChild(divF)
+
+      let input=document.createElement('input')
+      input.setAttribute('type','button')
+      input.setAttribute('value','Adquirir')
+      input.setAttribute('class','btn btn-block btn-primary adquirir boton')
+      input.setAttribute('onclick',`adquirir(${data.id});`)
+      input.setAttribute('id',`${data.id}`)
+      divF.appendChild(input)
+
+
+    }
+})
+  
+  
   
 }

@@ -65,19 +65,25 @@
  
     <!--Flechita para subir cuando se llega al final de la página-->
     <span class="up"></span>
+
+
     <!--Modal en index, cuando el usuario no se ha logueado-->
     <div id="modal">
-      <button id="cerrarModal" class="btn btn-danger">X</button>
+      <button id="cerrarModalIn" class="btn btn-danger" onclick="cerrarIn()">X</button>
       <h4>Aun no te has registrado!</h4>
       <hr>
       <p>Porfavor, ingresa o crea un usuario para conseguir nuestros productos</p>
       <a href="./logueo/loguin.html">Registrarme</a>
       <a href="./logueo/signin.html">Ingresar con mi usuario</a>
     </div>
-    <!--Contenido de la pagina, productos, carrito-->
-    <main id="m" class="container">
 
-       <div id="contenedor" class="mt-5 row row-cols-1 row-cols-md-4 row-cols-sm-2 g-1"></div>
+   
+    <main id="m" class="container">
+    <!--Contenido de la pagina, productos, carrito-->
+    <div id="contenedor" class="mt-5 row row-cols-1 row-cols-md-4 row-cols-sm-2 g-1"></div>
+    <div id="modalInfoMovie"></div>  
+
+
 
       <!--tablita para imprimir productos-->
       <div class="row container" id="tablita">
@@ -103,11 +109,22 @@
           </table>
         </div>
       </div>  
+
      <!--Coloco modal para finalizar compra-->
      <div id="modalCompra" class="container-fluid" >
      </div>
+     
 
-    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class='modal-dialog modal-dialog-scrollable'>
+        <div class="modal-content" id="ModalMovie">
+           <!---Contenido Modal-->
+            
+          </div>
+        </div>
+      </div>
+    </div>
       <section class="container m-5">
         <label>Comenta:</label>
         <input type="text" id="opina" value ="" size=20>
